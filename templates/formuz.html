@@ -1,0 +1,827 @@
+{% load static %}
+{% load crispy_forms_tags %}
+<html>
+<head>
+ <meta charset="UTF-8">
+    <title></title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<!-- Link -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous">
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous">
+    </script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous">
+    </script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+    <!-- Fontawesome_Pro -->
+    <link href="https://kit-pro.fontawesome.com/releases/v5.15.1/css/pro.min.css" rel="stylesheet">
+    <!-- Style -->
+    <link rel="stylesheet" href="{% static 'css/base2.css' %}">
+
+
+
+</head>
+
+
+{% block content %}
+<body class="p-5">
+       <form method="POST" role="form" enctype="multipart/form-data" id="form-container">
+    {% csrf_token %}
+    <h2>Add new education</h2>
+
+    {{ education_formset.management_form }}
+       {{ my_form.as_p }}
+           {% for form in  education_formset %}
+                <div class="edu-form">
+                {{ form.as_p }}
+                </div>
+           {% endfor %}
+       <button id="add-form" type="button">Add Education form</button>
+       <button type="submit">Submit education form</button>
+
+       </form>
+
+       <script>
+       let eduForm = document.querySelectorAll(".edu-form")
+       let container = document.querySelector("#form-container")
+       let addButton = document.querySelector("#add-form")
+       let totalForms = document.querySelector("#id_form-TOTAL_FORMS")
+
+       let formNum = eduForm.length-1 // Get the number of the last form on the page with zero-based indexing
+        addButton.addEventListener('click', addForm)
+
+       function addForm(e) {
+           e.preventDefault()
+           let newForm = eduForm[0].cloneNode(true) //Clone the bird form
+           let formRegex = RegExp(`form-(\\d){1}-`,'g') //Regex to find all instances of the form number
+           formNum++ //Increment the form number
+            newForm.innerHTML = newForm.innerHTML.replace(formRegex, `form-${formNum}-`) //Update the new form to have the correct form number
+            container.insertBefore(newForm, addButton) //Insert the new form at the end of the list of forms
+
+           totalForms.setAttribute('value', `${formNum+1}`) //Increment the number of total forms in the management form
+       }
+
+       </script>
+
+
+
+
+{#    <div class="row pb-5">#}
+{#        <div class="col-md-9 text-center border-right border-info">#}
+{#            <h3>Резюме</h3>#}
+{#            <p class="text-muted">Yuriskonsult ("O'zmetkombinat" AJ) lavozimiga</p>#}
+{#            <p class="text-danger">Иш берувчи Сиз хақингизда тўлиқ бўлмаган ёки нотўғри биографик маълумотларни ўз ичига#}
+{#                олган резюмени кўриб чиқмаслик хуқуқига эга</p>#}
+{#        </div>#}
+{##}
+{#        <div class="col-md-3">#}
+{#            <img src="https://www.pngkit.com/png/full/21-217883_anonymous-user-icon-accounting.png"#}
+{#                class="w-50 py-2 d-block m-auto" id="avatarImg">#}
+{#            <input type="file" class="d-block m-auto"  id="files" name="files[]">#}
+{##}
+{##}
+{#        </div>#}
+{#    </div>#}
+{##}
+{#    <div class="row was-validated">#}
+{#        <div class="col-md-4 mb-3">#}
+{#            <label for="validationServer01">1. Фамилия</label>#}
+{#            <input type="text" class="form-control is-valid d-block" id="validationServer01" placeholder="Фамилия"#}
+{#                value="Mark" required>#}
+{#        </div>#}
+{##}
+{#        <div class="col-md-4 mb-3">#}
+{#            <label for="validationServer01">2. Исм</label>#}
+{#            <input type="text" class="form-control is-valid d-block" id="validationServer01" placeholder="Исм"#}
+{#                value="Mark" required>#}
+{#        </div>#}
+{##}
+{#        <div class="col-md-4 mb-3">#}
+{#            <label for="validationServer01">3. Шарифингиз</label>#}
+{#            <input type="text" class="form-control is-valid d-block" id="validationServer01" placeholder="Шарифингиз"#}
+{#            >#}
+{#        </div>#}
+{##}
+{#        <div class="col-md-4 mb-3">#}
+{#            <label for="validationServer01">4. Туғилган сана</label>#}
+{#            <input type="date" class="form-control is-valid d-block" id="validationServer01" placeholder="Туғилган сана"#}
+{#             required>#}
+{#        </div>#}
+{##}
+{#        <div class="col-md-4 mb-3">#}
+{#            <label for="validationServer01">5. Миллати</label>#}
+{#            <input type="text" class="form-control is-valid d-block" id="validationServer01" placeholder="Миллати"#}
+{#             required>#}
+{#        </div>#}
+{##}
+{#        <div class="col-md-4 mb-3">#}
+{#            <label for="validationServer01">6. Туғилган жойи</label>#}
+{#            <input type="text" class="form-control is-valid d-block" id="validationServer01" placeholder="Туғилган жойи"#}
+{#             required>#}
+{#             <div class="valid-feedback">#}
+{#                туман, шаҳар, вилоят, республика#}
+{#              </div>#}
+{#        </div>#}
+{##}
+{#        <div class="col-md-4 mb-3">#}
+{#            <label for="">7. Оилавий ҳолат</label>#}
+{#            <input type="radio" name="is_married" class="mr-2"><span class="mr-3">Уйланган</span>#}
+{#            <input type="radio" name="is_married" class="mr-2"><span class="mr-3">Буйдок</span>#}
+{#        </div>#}
+{##}
+{#        <div class="col-md-4 mb-3">#}
+{#            <label for="">8. Фарзандлари</label>#}
+{#            <input type="radio" name="child" class="mr-2"><span class="mr-3">Бор</span>#}
+{#            <input type="radio" name="child" class="mr-2"><span class="mr-3">Йўк</span>#}
+{#        </div>#}
+{##}
+{#        <div class="col-12 mb-3">#}
+{#            <label for="">9. Ҳарбий хизматга мажбурлигингиз ва ҳарбий унвонингиз</label>#}
+{#            <input type="text" class="form-control d-block" id="validationServer01" placeholder="Ҳарбий хизматга мажбурлигингиз ва ҳарбий унвонингиз"#}
+{#        required>#}
+{#        </div>#}
+{##}
+{#        <div class="col-sm-12">#}
+{#            <label for="">10. Маълумотингиз</label>#}
+{#                <hr class="border border-info">#}
+{#        <div class="row">#}
+{#            <div class="col-sm-3 ">#}
+{#            <label for="endedDate">Кабул қилинган сана</label>#}
+{#            <input type="date" class="form-control is-valid d-block" id="validationServer01" placeholder="Кабул қилинган сана"#}
+{#                 >#}
+{#        </div>#}
+{#            <div class="col-sm-3 ">#}
+{#            <label for="endedDate">Тугаш санаси</label>#}
+{#            <input type="date" class="form-control is-valid d-block" id="validationServer01" placeholder="Тугаш санаси"#}
+{#                 >#}
+{#        </div>#}
+{#    <div class="col-sm-6" >#}
+{#                 <label for="OrganizationName" class="text-left">Ўқув масканининг номланиши</label>#}
+{#                 <input type="text" name="organizationName" class="form-control is-valid" placeholder="Ўқув масканининг номланиши" >#}
+{#             </div>#}
+{#</div>#}
+{#            <div class="row mb-4">#}
+{##}
+{#            <div class="col-sm-3">#}
+{#            <label for="degree">Даражаси</label>#}
+{#            <input type="text" class="form-control is-valid d-block" id="validationServer01" placeholder="Даражаси"#}
+{#                 >#}
+{#        </div>#}
+{##}
+{#        <div class="col-sm-3 ">#}
+{#            <label for="degree">Мутахассислиги</label>#}
+{#            <input type="text" class="form-control is-valid d-block" id="validationServer01" placeholder="Мутахассислиги"#}
+{#                 >#}
+{#        </div>#}
+{#             <div class="col-sm-6" >#}
+{#                 <label for="diplomnumber" class="text-left">Серия ва диплом № </label>#}
+{#                 <input type="text" name="diplomnumber" class="form-control is-valid" placeholder="Серия ва диплом № " >#}
+{#             </div>#}
+{#            </div>#}
+{#            <div class="d-flex justify-content-end">#}
+{#            <button class="btn-sm border-0 btn-success" id="add-form">#}
+{#                                <i class="fal fa-plus"></i> Яна қўшиш#}
+{#                            </button>#}
+{#            </div>#}
+{# <hr class="border border-info">#}
+{#        </div>#}
+{#        </div>#}
+{##}
+{#        <div class="col-12">#}
+{#            <label for="">11. Қўшимча маълумот, малака ошириш, курслар ва тренинглар</label>#}
+{#            <input type="text" class="form-control d-block" id="validationServer01" placeholder="Қўшимча маълумот, малака ошириш, курслар ва тренинглар"#}
+{#        required>#}
+{#        <p class="index-info text-muted">#}
+{#            ўқув масканининг номланиши,қачон, муддати, мавзуси#}
+{#          </p>#}
+{#        </div>#}
+{##}
+{#        <div class="col-12">#}
+{#            <label for="">12. Давлат ва чет тилларини қай даражада биласиз</label>#}
+{#        <hr class="border border-info"><br>#}
+{##}
+{#        <div class="row lang">#}
+{#            <div class="col-md-4">#}
+{#                <label for="">Ўзбекча</label>#}
+{#                <select class="custom-select" required>#}
+{#                  <option value="">Руйхатдан танланг...</option>#}
+{#                  <option value="1">Билмайман</option>#}
+{#                  <option value="2">Емон</option>#}
+{#                  <option value="3">Лугат ёрдамида</option>#}
+{#                  <option value="4">Ўртача</option>#}
+{#                  <option value="5">Яхши</option>#}
+{#                  <option value="6">Жуда яхши</option>#}
+{#                </select>#}
+{##}
+{#            </div>#}
+{##}
+{#            <div class="col-md-4">#}
+{#                <label for="">Русча</label>#}
+{#                <select class="custom-select" required>#}
+{#                  <option value="">Руйхатдан танланг...</option>#}
+{#                  <option value="1">Билмайман</option>#}
+{#                  <option value="2">Емон</option>#}
+{#                  <option value="3">Лугат ёрдамида</option>#}
+{#                  <option value="4">Ўртача</option>#}
+{#                  <option value="5">Яхши</option>#}
+{#                  <option value="6">Жуда яхши</option>#}
+{#                </select>#}
+{#            </div>#}
+{##}
+{#            <div class="col-md-4">#}
+{#                <label for="">Инглизча</label>#}
+{#                <select class="custom-select" required>#}
+{#                  <option value="">Руйхатдан танланг...</option>#}
+{#                  <option value="1">Билмайман</option>#}
+{#                  <option value="2">Емон</option>#}
+{#                  <option value="3">Лугат ёрдамида</option>#}
+{#                  <option value="4">Ўртача</option>#}
+{#                  <option value="5">Яхши</option>#}
+{#                  <option value="6">Жуда яхши</option>#}
+{#                </select>#}
+{#            </div>#}
+{#        </div>#}
+{##}
+{#        </div>#}
+{##}
+{#        <div class="col-12 my-4">#}
+{#            <label for="">Бошка</label>#}
+{#            <textarea name="" id="" class="w-100" ></textarea>#}
+{#        </div>#}
+{##}
+{#    </div>#}
+{##}
+{#    <div class="row">#}
+{##}
+{#        <div class="col-12">#}
+{#            <label for="">13. ЭҲМ да ишлаш ва программаларнинг турлари бўйича билим ва кўникмалар</label>#}
+{#            <hr class="border border-info">#}
+{#        </div>#}
+{##}
+{#        <div class="col-md-3">#}
+{#            <input type="radio" name="skill">#}
+{#            <span>Эга эмас</span>#}
+{#        </div>#}
+{#        <div class="col-md-9">#}
+{#            <p>#}
+{#                Шахсий компютерларда ишлаш кўникмасига эга эмас#}
+{#            </p>#}
+{#        </div>#}
+{#        <hr>#}
+{#        <div class="col-md-3">#}
+{#            <input type="radio" name="skill">#}
+{#            <span>Бошланғич</span>#}
+{#        </div>#}
+{#        <div class="col-md-9">#}
+{#            <p>#}
+{#                Windows операцион тизимининг асосий вазифаларини ўзлаштирган (улардан фойдаланиш, қайта номлаш, кўчириш, матн билан ишлаш, уни яратиш, ҳужжатларни сақлаш ва ҳ.к.#}
+{#            </p>#}
+{#        </div>#}
+{#        <hr>#}
+{#        <div class="col-md-3">#}
+{#            <input type="radio" name="skill">#}
+{#            <span>Ўртача</span>#}
+{#        </div>#}
+{#        <div class="col-md-9">#}
+{#            <p>#}
+{#                Microsoft Office тўплам ва маҳсулотларини, Word ва Excel офис дастурларини ҳамда электрон почта ва турли браузерларни ўзлаштирган#}
+{#            </p>#}
+{#        </div>#}
+{#        <hr>#}
+{#        <div class="col-md-3">#}
+{#            <input type="radio" name="skill">#}
+{#            <span>Аниқ</span>#}
+{#        </div>#}
+{#        <div class="col-md-9">#}
+{#            <p>#}
+{#                Microsoft Office нинг барча дастурларини, махсус тизимларни ва бошқариш тизимини лойиҳалашни тўлиқ ўзлаштирган#}
+{#            </p>#}
+{#        </div>#}
+{#        <hr>#}
+{#        <div class="col-md-3">#}
+{#            <input type="radio" name="skill">#}
+{#            <span>Илғор</span>#}
+{#        </div>#}
+{#        <div class="col-md-9">#}
+{#            <p>#}
+{##}
+{#            </p>#}
+{#        </div>#}
+{#        <hr>#}
+{##}
+{##}
+{#    </div>#}
+{##}
+{#    <div class="row">#}
+{#        <div class="col-12">#}
+{#            <label for="">14. Меҳнат фаолияти</label>#}
+{#                <hr class="border border-info">#}
+{#            <table class="table table-responsive">#}
+{#                <th class="row">#}
+{#                    <td class="col-md-2 border-bottom border-top py-2 border-secondary">#}
+{#                        Қабул қилинган сана</td>#}
+{#                    <td class="col-md-3 border-bottom border-top py-2 border-secondary">#}
+{#                        <i class="fal fa-sort-circle text-info icon_sort"></i>#}
+{#                        Ишдан бушатиш санаси</td>#}
+{#                    <td class="col-md-2 border-bottom border-top py-2 border-secondary">#}
+{#                        <i class="fal fa-sort-circle text-info icon_sort"></i>#}
+{#                        Ташкилот (корхона) номи</td>#}
+{#                    <td class="col-md-2 border-bottom border-top py-2 border-secondary">#}
+{#                        <i class="fal fa-sort-circle text-info icon_sort"></i>#}
+{#                        Қайси лавозимда</td>#}
+{#                        <td class="col-md-2 border-bottom border-top py-2 border-secondary">#}
+{#                        <i class="fal fa-sort-circle text-info icon_sort"></i>#}
+{#                        Ташкилот манзили</td>#}
+{#                    <td class="col-md-1 border-bottom border-top py-2 border-secondary">#}
+{#                        <div class="text-center">#}
+{#                            <button class="btn-sm border-0 btn-success" data-toggle="modal" data-target="#experienceModal">#}
+{#                                <i class="fal fa-plus"></i>#}
+{#                            </button>#}
+{##}
+{#                             <!-- The Modal -->#}
+{#  <div class="modal fade" id="experienceModal">#}
+{#    <div class="modal-dialog">#}
+{#      <div class="modal-content">#}
+{##}
+{#        <!-- Modal Header -->#}
+{#        <div class="modal-header">#}
+{#          <h4 class="modal-title">Янги ёзувни кўшиш </h4>#}
+{#          <button type="button" class="close" data-dismiss="modal">X</button>#}
+{#        </div>#}
+{##}
+{#        <!-- Modal body -->#}
+{#        <div class="modal-body">#}
+{#         <div class="row was-validated text-left">#}
+{#        <div class="col-md-6">#}
+{#            <label for="acceptedDate">Қабул қилинган сана</label>#}
+{#            <input type="date" class="form-control is-valid d-block" id="validationServer01" placeholder="Қабул қилинган сана"#}
+{#                 >#}
+{#        </div>#}
+{##}
+{#        <div class="col-md-6 ">#}
+{#            <label for="endedDate">Ишдан бўшатиш санаси</label>#}
+{#            <input type="date" class="form-control is-valid d-block" id="validationServer01" placeholder="Ишдан бўшатиш санаси"#}
+{#                 >#}
+{#        </div>#}
+{#                <div class="col-md-12" >#}
+{#                 <label for="OrganizationName" class="text-left">Ташкилот (корхона) номи</label>#}
+{#                 <input type="text" name="organizationName" class="form-control is-valid" placeholder="Ташкилот(корхона) номи" >#}
+{#             </div>#}
+{##}
+{#             <div class="col-sm-6">#}
+{#            <label for="degree">Кандай лавозимда</label>#}
+{#            <input type="text" class="form-control is-valid d-block" id="validationServer01" placeholder="Кандай лавозимда ишлагансиз"#}
+{#                 >#}
+{#        </div>#}
+{##}
+{#        <div class="col-sm-6 ">#}
+{#            <label for="degree">Ташкилот манзили</label>#}
+{#            <input type="text" class="form-control is-valid d-block" id="validationServer01" placeholder="Ташкилот манзили"#}
+{#                 >#}
+{#        </div>#}
+{#             <div class="col-sm-12" >#}
+{#                 <label for="diplomnumber" class="text-left">Серия ва диплом № </label>#}
+{#                 <input type="text" name="diplomnumber" class="form-control is-valid" placeholder="Серия ва диплом № ">#}
+{#             </div>#}
+{##}
+{#        </div>#}
+{#        </div>#}
+{##}
+{#        <!-- Modal footer -->#}
+{#        <div class="modal-footer">#}
+{#            <button type="submit" class="btn btn-success">Сақлаш</button>#}
+{#          <button type="button" class="btn btn-danger" data-dismiss="modal">Бекор қилиш</button>#}
+{#        </div>#}
+{##}
+{#      </div>#}
+{#    </div>#}
+{#  </div>#}
+{##}
+{##}
+{#                            <button class="btn-sm border-0 btn-success">#}
+{#                                <i class="fal fa-trash"></i>#}
+{#                            </button>#}
+{#                        </div>#}
+{#                    </td>#}
+{#                </th>#}
+{#            </table>#}
+{#            <p class="text-info text-center">#}
+{#                Маълумотлар топилмади. Илтимос, янги ёзувни киритиш учун `кўшиш` тугмачасини босинг.#}
+{#            </p>#}
+{#        </div>#}
+{#    </div>#}
+{##}
+{#    <div class="row">#}
+{#        <div class="col-12">#}
+{#            <div class="form-group">#}
+{#                <label for="exampleInputEmail1">Функционал мажбуриятлар</label>#}
+{#                <input type="email" class="form-control w-100" id="" aria-describedby="" placeholder="">#}
+{#            </div>#}
+{#        </div>#}
+{#        <div class="col-12">#}
+{#            <div class="form-group">#}
+{#                <label for="exampleInputEmail1">Иш тажрибаси</label>#}
+{#                <input type="email" class="form-control w-100" id="" aria-describedby="" placeholder="">#}
+{#            </div>#}
+{#        </div>#}
+{#        <div class="col-12">#}
+{#            <div class="form-group">#}
+{#                <label for="exampleInputEmail1">Тараққиёт</label>#}
+{#                <input type="email" class="form-control w-100" id="" aria-describedby="" placeholder="">#}
+{#            </div>#}
+{#        <hr class="border border-info">#}
+{#        </div>#}
+{#    </div>#}
+{##}
+{#    <div class="row">#}
+{#        <div class="col-12">#}
+{#            <div class="form-group">#}
+{#                <label for="exampleInputEmail1">15. Нима сабабдан сиз охирги иш жойингизни тарк этдингиз (ёки қарор қилдингиз)</label>#}
+{#                <input type="email" class="form-control w-100" id="" aria-describedby="" placeholder="Нима сабабдан сиз охирги иш жойингизни тарк этдингиз (ёки қарор қилдингиз)">#}
+{#            </div>#}
+{#        </div>#}
+{#        <div class="col-12">#}
+{#            <div class="form-group">#}
+{#                <label for="exampleInputEmail1">16. Асосий кўникмалар</label>#}
+{#                <input type="email" class="form-control w-100" id="" aria-describedby="" placeholder="">#}
+{#                <p class="text-muted index-info">биринчи навбатда кўрсатилиши лозим: кўрилаётган мутахассислик бўйича қанақа профессионал тажриба ва кўникмаларга эгалигингизни, унга таълуқли техника ва ускуналарнинг турларини билишингиз ва улар билан муомала қилишингизни, махсус технологиялар ва дастурларни ўзлаштирганингизни, қўйилган вазифани яхши бажариш учун зарур бўлган билим ва махоратингизни ва ҳ.к.</p>#}
+{#            </div>#}
+{#        </div>#}
+{#    </div>#}
+{##}
+{#    <div class="row">#}
+{#        <div class="col-12">#}
+{#            <label for="">17. Шахсий фазилатларингиз</label>#}
+{#            <hr class="border border-info">#}
+{#        </div>#}
+{##}
+{#        <div class="col-md-4 my-3">#}
+{#            <span class="pr-3">интизомли</span>#}
+{#            <input type="radio" class="mx-1" name="one">Xa#}
+{#            <input type="radio" class="mx-1" name="one">Йўк#}
+{#        </div>#}
+{#        <div class="col-md-4 my-3">#}
+{#            <span class="pr-3">ижрочи</span>#}
+{#            <input type="radio" class="mx-1" name="two">Xa#}
+{#            <input type="radio" class="mx-1" name="two">Йўк#}
+{#        </div>#}
+{#        <div class="col-md-4 my-3">#}
+{#            <span class="pr-3">меҳнаткаш</span>#}
+{#            <input type="radio" class="mx-1" name="three">Xa#}
+{#            <input type="radio" class="mx-1" name="three">Йўк#}
+{#        </div>#}
+{#        <div class="col-md-4 my-3">#}
+{#            <span class="pr-3">ҳалол</span>#}
+{#            <input type="radio" class="mx-1" name="four">Xa#}
+{#            <input type="radio" class="mx-1" name="four">Йўк#}
+{#        </div>#}
+{#        <div class="col-md-4 my-3">#}
+{#            <span class="pr-3">тиришқоқ</span>#}
+{#            <input type="radio" class="mx-1" name="five">Xa#}
+{#            <input type="radio" class="mx-1" name="five">Йўк#}
+{#        </div>#}
+{#        <div class="col-md-4 my-3">#}
+{#            <span class="pr-3">ташаббускор</span>#}
+{#            <input type="radio" class="mx-1" name="six">Xa#}
+{#            <input type="radio" class="mx-1" name="six">Йўк#}
+{#        </div>#}
+{#        <div class="col-md-4 my-3">#}
+{#            <span class="pr-3">ақлли</span>#}
+{#            <input type="radio" class="mx-1" name="seven">Xa#}
+{#            <input type="radio" class="mx-1" name="seven">Йўк#}
+{#        </div>#}
+{#        <div class="col-md-4 my-3">#}
+{#            <span class="pr-3">ташкилотчилик қобилияти</span>#}
+{#            <input type="radio" class="mx-1" name="eight">Xa#}
+{#            <input type="radio" class="mx-1" name="eight">Йўк#}
+{#        </div>#}
+{#        <div class="col-md-4 my-3">#}
+{#            <span class="pr-3">компаниянинг манфаатларини ҳимоя қилиш қобилияти</span>#}
+{#            <input type="radio" class="mx-1" name="nine">Xa#}
+{#            <input type="radio" class="mx-1" name="nine">Йўк#}
+{#        </div>#}
+{#        <div class="col-md-4 my-3">#}
+{#            <span class="pr-3">жамоада изчил ишлаш қобилияти</span>#}
+{#            <input type="radio" class="mx-1" name="ten">Xa#}
+{#            <input type="radio" class="mx-1" name="ten">Йўк#}
+{#        </div>#}
+{#    </div>#}
+{##}
+{#    <div class="row">#}
+{#        <div class="col-12">#}
+{#            <label for="">18. Ишга тайёрлигингиз</label>#}
+{#            <hr class="border border-info">#}
+{#        </div>#}
+{##}
+{#        <div class="col-md-3 my-3">#}
+{#            <span class="pr-3">Китоблар</span>#}
+{#            <input type="radio" class="mx-1" name="book">Xa#}
+{#            <input type="radio" class="mx-1" name="book">Йўк#}
+{#        </div>#}
+{##}
+{#        <div class="col-md-3 my-3">#}
+{#            <span class="pr-3">Кино</span>#}
+{#            <input type="radio" class="mx-1" name="kino">Xa#}
+{#            <input type="radio" class="mx-1" name="kino">Йўк#}
+{#        </div>#}
+{##}
+{#        <div class="col-md-3 my-3">#}
+{#            <span class="pr-3">Театр</span>#}
+{#            <input type="radio" class="mx-1" name="theatr">Xa#}
+{#            <input type="radio" class="mx-1" name="theatr">Йўк#}
+{#        </div>#}
+{##}
+{#        <div class="col-md-3 my-3">#}
+{#            <span class="pr-3">Спорт</span>#}
+{#            <input type="radio" class="mx-1" name="sport">Xa#}
+{#            <input type="radio" class="mx-1" name="sport">Йўк#}
+{#        </div>#}
+{##}
+{#        <div class="col-md-3 my-3">#}
+{#            <span class="pr-3">Музей</span>#}
+{#            <input type="radio" class="mx-1" name="mouseum">Xa#}
+{#            <input type="radio" class="mx-1" name="mouseum">Йўк#}
+{#        </div>#}
+{##}
+{#        <div class="col-md-3 my-3">#}
+{#            <span class="pr-3">Саёхат</span>#}
+{#            <input type="radio" class="mx-1" name="trip">Xa#}
+{#            <input type="radio" class="mx-1" name="trip">Йўк#}
+{#        </div>#}
+{##}
+{#        <div class="col-md-3 my-3">#}
+{#            <span class="pr-3">Дўстлар давраси</span>#}
+{#            <input type="radio" class="mx-1" name="friend">Xa#}
+{#            <input type="radio" class="mx-1" name="friend">Йўк#}
+{#        </div>#}
+{##}
+{#        <div class="col-12">#}
+{#            <label for="">Бошка</label>#}
+{#            <input type="" class="form-control" placeholder="Бошка">#}
+{#        </div>#}
+{##}
+{#        <div class="col-12">#}
+{#            <label for="">22. Қанча ойлик маошга мўлжал қилмоқдасиз (сум)</label>#}
+{#            <input type="" class="form-control" placeholder="Қанча ойлик маошга мўлжал қилмоқдасиз (сум)">#}
+{#        </div>#}
+{##}
+{#        <div class="col-12">#}
+{#            <label for="">21. Сизни компаниямизда ишлашга нималар ундайди</label>#}
+{#            <input type="" class="form-control" placeholder="Сизни компаниямизда ишлашга нималар ундайди">#}
+{#        </div>#}
+{##}
+{#    </div>#}
+{##}
+{#    <div class="form-row was-validated">#}
+{#        <div class="col-12">#}
+{#            <label for="">22. Ушбу компанияда ишлайдиган Сизга тегишли қариндош ёки алоқадор кишилар борми</label>#}
+{#            <input type="" class="form-control" placeholder="Ушбу компанияда ишлайдиган Сизга тегишли қариндош ёки алоқадор кишилар борми" required>#}
+{#            <span class="index-info">Ф.И.Ш., ишлаш жойи ва лавозими</span>#}
+{#        </div>#}
+{#        <div class="col-12">#}
+{#            <label for="">23. Маъмурий ёки жиноий жавобгарликка тортилганмисиз?</label>#}
+{#            <input type="" class="form-control" placeholder="Маъмурий ёки жиноий жавобгарликка тортилганмисиз?" required>#}
+{#            <span class="index-info">“йўқ”, агар “ҳа” жавоби бўлса: қаерда; қачон ва нима учун; МжК ёки ЖКнинг қайси банди бўйича</span>#}
+{#        </div>#}
+{##}
+{#        <div class="col-12">#}
+{#            <label for="" >#}
+{#                24. Ишлаган жойингиздан раҳбар ёки ҳамкасблардан ким Сизга тавсиянома бера олади#}
+{#                <hr class="border border-info">#}
+{#            </label>#}
+{#        </div>#}
+{#        <table class="table table-responsive">#}
+{#            <th class="row">#}
+{#                <td class="col-md-3 border-bottom border-top py-2 border-secondary">#}
+{#                    Ф.И.Ш. (тўлиқ)</td>#}
+{#                <td class="col-md-3 border-bottom border-top py-2 border-secondary">#}
+{#                    <i class="fal fa-sort-circle text-info icon_sort"></i>#}
+{#                    Иш жойи, лавозими</td>#}
+{#                <td class="col-md-3 border-bottom border-top py-2 border-secondary">#}
+{#                    <i class="fal fa-sort-circle text-info icon_sort"></i>#}
+{#                    Телефон рақами, е-mail</td>#}
+{#                <td class="col-md-3 border-bottom border-top py-2 border-secondary">#}
+{#                    <div class="text-center">#}
+{#                        <button class="btn-sm border-0 btn-success"  data-toggle="modal" data-target="#recommendModel">#}
+{#                            <i class="fal fa-plus"></i>#}
+{#                        </button>#}
+{##}
+{#                                                     <!-- The Modal -->#}
+{#  <div class="modal fade" id="recommendModel">#}
+{#    <div class="modal-dialog">#}
+{#      <div class="modal-content">#}
+{##}
+{#        <!-- Modal Header -->#}
+{#        <div class="modal-header">#}
+{#          <h4 class="modal-title">Янги ёзувни кўшиш </h4>#}
+{#          <button type="button" class="close" data-dismiss="modal">X</button>#}
+{#        </div>#}
+{##}
+{#        <!-- Modal body -->#}
+{#        <div class="modal-body modal-responsive">#}
+{#         <div class="row was-validated text-left">#}
+{##}
+{#                <div class="col-sm-12" >#}
+{#                 <label for="OrganizationName" class="text-left">Ф.И.Ш. (тўлик)</label>#}
+{#                 <input type="text" name="organizationName" class="form-control is-valid" placeholder="Ф.И.Ш. (тўлик)" >#}
+{#             </div>#}
+{##}
+{#             <div class="col-sm-12">#}
+{#            <label for="degree">Иш жойи, лавозими</label>#}
+{#            <input type="text" class="form-control is-valid d-block" id="validationServer01" placeholder="Иш жойи, лавозими"#}
+{#                 >#}
+{#        </div>#}
+{##}
+{#        <div class="col-sm-12 ">#}
+{#            <label for="degree">Телефон рақами, e-mail</label>#}
+{#            <input type="text" class="form-control is-valid d-block" id="validationServer01" placeholder="Ташкилот манзили"#}
+{#                 >#}
+{#        </div>#}
+{##}
+{#        </div>#}
+{#        </div>#}
+{##}
+{#        <!-- Modal footer -->#}
+{#        <div class="modal-footer">#}
+{#            <button type="submit" class="btn btn-success">Сақлаш</button>#}
+{#          <button type="button" class="btn btn-danger" data-dismiss="modal">Бекор қилиш</button>#}
+{#        </div>#}
+{##}
+{#      </div>#}
+{#    </div>#}
+{#  </div>#}
+{##}
+{#                        <button class="btn-sm border-0 btn-success">#}
+{#                            <i class="fal fa-trash"></i>#}
+{#                        </button>#}
+{#                    </div>#}
+{#                </td>#}
+{#            </th>#}
+{#        </table>#}
+{#        <div class="col-12">#}
+{#            <p class="text-center text-info">Маълумотлар топилмади. Илтимос, янги ёзувни киритиш учун `кўшиш` тугмачасини босинг.</p>#}
+{#        </div>#}
+{#    </div>#}
+{##}
+{#    <div class="row">#}
+{#        <div class="col-12">#}
+{#            <label for="">25. Алоқа турлари#}
+{#                <hr class="border border-info">#}
+{#            </label>#}
+{#        </div>#}
+{#        <div class="col-md-6">#}
+{#            <label for="">уй тел.</label>#}
+{#            <input type="phone" class="form-control" placeholder="уй тел">#}
+{#        </div>#}
+{#        <div class="col-md-6">#}
+{#            <label for="">мобил алоқа</label>#}
+{#            <input type="phone" class="form-control" placeholder="+998 99 999 99 99">#}
+{#        </div>#}
+{#        <div class="col-md-12">#}
+{#            <label for="">e-mail</label>#}
+{#            <input type="email" class="form-control" placeholder="info@email.com">#}
+{#        </div>#}
+{##}
+{#        <div class="col-12">#}
+{#            <label for="">26. Ўзингиз ҳақингизда яна нималарни қўшимча қила оласиз</label>#}
+{#            <textarea class="form-control" name="" id="" cols="30" rows=""></textarea>#}
+{#        </div>#}
+{#        <div class="col-12">#}
+{#            <label for="">27. Ушбу резюмеда кўрсатилган маълумотларни тасдиқлайсизми</label>#}
+{#            <input type="radio" name="confirm"><span class="ml-2 mr-3">Xa</span>#}
+{#            <input type="radio" name="confirm"><span class="ml-2 mr-3">Йўк</span>#}
+{#        </div>#}
+{#        <div class="col-12">#}
+{#            <label for="">28. Шахсий маълумотларингизни қайта ишлашимизга (ўрганишимизга) розилик берасизми</label>#}
+{#            <input type="radio" class="personal_info"><span class="ml-2 mr-3">Xa</span>#}
+{#            <input type="radio" class="personal_info"><span class="ml-2 mr-3">Йўк</span>#}
+{#        </div>#}
+{#    </div>#}
+{##}
+{#    <div class="row form-group  was-validated">#}
+{#        <div class="col-12">#}
+{#            <label for="">Обязательные файлы</label>#}
+{#            <hr class="border border-info">#}
+{#        </div>#}
+{#        <div class="col-12">#}
+{#            <label for="">Удостоверение личности</label>#}
+{#            <textarea class="form-control" name="" id="" cols="30" rows="" placeholder="Пасспорт кандидата" required></textarea>#}
+{#        </div>#}
+{#        <div class="col-12">#}
+{#            <label for="">Диплом</label>#}
+{#            <textarea class="form-control" name="" id="" cols="30" rows="" placeholder="Дипломы/Сертификаты об окончании учебных заведений объединенных в один архив" required></textarea>#}
+{#        </div>#}
+{#        <div class="col-12">#}
+{#            <label for="">Трудовая книжка</label>#}
+{#            <input type="text" class="form-control" placeholder="Трудовая книжка">#}
+{#        </div>#}
+{#    </div>#}
+{##}
+{#    <div class="row">#}
+{#        <div class="col-12">#}
+{#            <label for="">Прочие документы</label>#}
+{#            <hr class="border border-info">#}
+{#        </div>#}
+{#        <table>#}
+{#            <th class="row">#}
+{#                <td class="col-md-3 border-bottom border-top py-2 border-secondary">Қабул қилинган сана</td>#}
+{#                <td class="col-md-8 border-bottom border-top py-2 border-secondary">#}
+{#                    <i class="fal fa-sort-circle text-info icon_sort"></i>#}
+{#                    Ўқув масканининг номланиши</td>#}
+{#                <td class="col-md-2 border-bottom border-top py-2 border-secondary">#}
+{#                    <div class="text-center">#}
+{#                        <button class="btn-sm border-0 btn-success" data-toggle="modal" data-target="#otherDocsModal">#}
+{#                            <i class="fal fa-plus"></i>#}
+{#                        </button>#}
+{##}
+{#                                                                <!-- The Modal -->#}
+{#  <div class="modal fade" id="otherDocsModal">#}
+{#    <div class="modal-dialog">#}
+{#      <div class="modal-content">#}
+{##}
+{#        <!-- Modal Header -->#}
+{#        <div class="modal-header">#}
+{#          <h4 class="modal-title">Янги ёзувни кўшиш </h4>#}
+{#          <button type="button" class="close" data-dismiss="modal">X</button>#}
+{#        </div>#}
+{##}
+{#        <!-- Modal body -->#}
+{#        <div class="modal-body modal-responsive">#}
+{#         <div class="row was-validated text-left">#}
+{##}
+{#                <div class="col-sm-12" >#}
+{#                 <label for="document" class="text-left">Хужжат</label>#}
+{#                 <input type="text" name="document" class="form-control is-valid" placeholder="Хужжат" >#}
+{#             </div>#}
+{##}
+{#             <div class="col-sm-12">#}
+{#            <label for="degree">Иш жойи, лавозими</label>#}
+{#            <input type="text" class="form-control is-valid d-block" id="validationServer01" placeholder="Хужжат ҳақида изоҳ"#}
+{#                 >#}
+{#        </div>#}
+{##}
+{#        </div>#}
+{#        </div>#}
+{##}
+{#        <!-- Modal footer -->#}
+{#        <div class="modal-footer">#}
+{#            <button type="submit" class="btn btn-success">Сақлаш</button>#}
+{#          <button type="button" class="btn btn-danger" data-dismiss="modal">Бекор қилиш</button>#}
+{#        </div>#}
+{##}
+{#      </div>#}
+{#    </div>#}
+{#  </div>#}
+{#                        <button class="btn-sm border-0 btn-success">#}
+{#                            <i class="fal fa-trash"></i>#}
+{#                        </button>#}
+{#                    </div>#}
+{#                </td>#}
+{#            </th>#}
+{#        </table>#}
+{#        <div class="col-12">#}
+{#            <p class="text-center text-info">Маълумотлар топилмади. Илтимос, янги ёзувни киритиш учун `кўшиш` тугмачасини босинг.#}
+{#                <hr class="border border-info">#}
+{#            </p>#}
+{#        </div>#}
+{#    </div>#}
+{##}
+{#    <div class="row was-validated">#}
+{#        <div class="col-12">#}
+{#            <label for="">ФИО</label>#}
+{#            <input type="text" class="form-control" required>#}
+{#        </div>#}
+{#        <div class="col-12">#}
+{#            <p class="text-center text-danger pt-5">#}
+{#                Иш берувчи Сиз хақингизда тўлиқ бўлмаган ёки нотўғри биографик маълумотларни ўз ичига олган резюмени кўриб чиқмаслик хуқуқига эга#}
+{#            </p>#}
+{#        </div>#}
+{#    </div>#}
+{##}
+{#    <section class="w-100">#}
+{#        <div class="container text-center">#}
+{#            <div class="btn-group btn-group-toggle" data-toggle="buttons">#}
+{#                <label class="btn btn-info">#}
+{#                  <button type="submit" name="options" id="option1" autocomplete="off" class="btn btn-info">#}
+{#                        Юбориш#}
+{#                  </button>#}
+{#                </label>#}
+{##}
+{#              </div>#}
+{#        </div>#}
+{#    </section>#}
+{#</form>#}
+{##}
+{##}
+{##}
+</body>
+{% endblock content %}
+</html>

@@ -1,0 +1,25 @@
+{% load crispy_forms_tags %}
+{% block content %}
+
+<form method="POST" enctype="multipart/form-data">{% csrf_token %}
+<h3>Education Form</h3>
+
+
+    <!-- Security token -->
+
+    <!-- Management data of formset -->
+    {{ eduFormSet.management_form  }}
+    <!-- Using the formset -->
+    {{ my_form.as_p }}
+    {% for formset_form in eduFormSet %}
+          <h3>Страница {{forloop.counter}}</h3>
+
+        {{ formset_form|crispy }}
+        {% endfor %}
+{#    {{ eduFormSet.as_p }}#}
+{#    {{ exprFormSet.as_p }}#}
+
+    <input type="submit" value="Submit">
+</form>
+
+{% endblock content %}
