@@ -18,10 +18,8 @@ class allApplicants(ListView):
     template_name = 'all_applicants.html'
 
 
-class AddFormView(View):
-    form_class = MyForm
+class AddFormView(TemplateView):
     template_name = 'formuz.html'
-    success_url = reverse_lazy('dashboard')
 
     # Define method to handle GET request
     def get(self, *args, **kwargs):
