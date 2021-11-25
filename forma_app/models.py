@@ -12,7 +12,7 @@ approve_choices = [('Yes', 'Ха'),
 agreement_choices = [('Yes', 'Ха'),
                     ('No', 'Йўк')]
 class UserForm_uz(models.Model):
-    rasm = models.ImageField(upload_to='media/rasmlar',null=True,blank=True)
+    # rasm = models.ImageField(upload_to='media/rasmlar',null=True,blank=True)
     lastName = models.CharField(max_length=200)
     firstName = models.CharField(max_length=200)
     middleName = models.CharField(max_length=200)
@@ -43,9 +43,9 @@ class UserForm_uz(models.Model):
     approve_info = models.CharField(choices=approve_choices,max_length=20)
     agreement = models.CharField(choices=agreement_choices,max_length=20)
 
-    passport_file = models.FileField(upload_to='media/fayllar')
-    diplom_file = models.FileField(upload_to='media/fayllar')
-    trudovoyKnishka = models.FileField(upload_to='media/fayllar')
+    # passport_file = models.FileField(upload_to='media/fayllar')
+    # diplom_file = models.FileField(upload_to='media/fayllar')
+    # trudovoyKnishka = models.FileField(upload_to='media/fayllar')
     fullName = models.CharField(max_length=100)
 
     def __str__(self):

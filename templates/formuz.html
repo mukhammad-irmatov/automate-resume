@@ -38,10 +38,15 @@
     <h2>Add new education</h2>
 
     {{ education_formset.management_form }}
+
+
+
        {{ my_form.as_p }}
            {% for form in  education_formset %}
                 <div class="edu-form">
+                {{ form.id }}
                 {{ form.as_p }}
+
                 </div>
            {% endfor %}
        <button id="add-form" type="button">Add Education form</button>
