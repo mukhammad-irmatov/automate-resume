@@ -26,32 +26,39 @@ class AddFormView(TemplateView):
         # Create an instance of the formset
         EducationFormSet = modelformset_factory(Education_uz, form=EducationForm, extra=1)
         education_formset = EducationFormSet(queryset=Education_uz.objects.none(),prefix='education')
+        ExperienceFormSet = modelformset_factory(Experience_uz,form=ExperienceForm,extra=1)
+        experience_formset = ExperienceFormSet(queryset=Experience_uz.objects.none(),prefix="experience")
         my_form = MyForm(prefix="form")
-        return self.render_to_response({'my_form':my_form,'education_formset':education_formset})
+        return self.render_to_response({'my_form':my_form,'education_formset':education_formset,'experience_formset':experience_formset})
 
 
     # Define method to handle POST request
     def post(self, *args, **kwargs):
         EducationFormSet = modelformset_factory(Education_uz, form=EducationForm, extra=1)
         education_formset = EducationFormSet(data = self.request.POST,prefix='education')
+        ExperienceFormSet = modelformset_factory(Experience_uz,form=ExperienceForm,extra=1)
+        experience_formset = ExperienceFormSet(data=self.request.POST,prefix="experience")
         my_form = MyForm(self.request.POST,self.request.FILES,prefix='form')
         print(education_formset)
         print(my_form)
 
-        if education_formset.is_valid() and my_form.is_valid():
+        if education_formset.is_valid() and my_form.is_valid() and education_formset.is_valid():
             form = my_form.save()
             education = education_formset.save(commit=False)
             for eduForma in education:
                 eduForma.form = form
                 eduForma.save()
-            # education.form = form
-            # education.save()
-            # my_form.save()
+
+            experience = experience_formset.save(commit=False)
+            for expForma in experience:
+                expForma.form = form
+                expForma.save()
+
             return redirect(reverse_lazy('dashboard'))
         # else:
         #     return HttpResponse("baribir ishlamottiyu", content_type='text/plain')
 
-        return self.render_to_response({'my_form':my_form,'education_formset':education_formset})
+        return self.render_to_response({'my_form':my_form,'education_formset':education_formset,'experience_formset':experience_formset})
 
 
 

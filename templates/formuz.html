@@ -35,7 +35,7 @@
 <body class="p-5">
        <form method="POST" role="form" enctype="multipart/form-data" id="form-container">
     {% csrf_token %}
-    <h2>Add new education</h2>
+    <h2>Add new Form</h2>
 {{ my_form.as_p }}
 
     {{ education_formset.management_form }}
@@ -45,32 +45,64 @@
                 {{ form.as_p }}
                 </div>
            {% endfor %}
+       <button id="add-Eduform" type="button">Add Education form</button>
+<div class="experience_section">
+        {{ experience_formset.management_form }}
 
-       <button id="add-form" type="button">Add Education form</button>
-       <button type="submit">Submit education form</button>
-
+           {% for form in  experience_formset %}
+                <div class="exp-form">
+                {{ form.as_p }}
+                </div>
+           {% endfor %}
+        <button id="add-Expform" type="button">Add Experience form</button>
+       <button type="submit">Submit form</button>
+</div>
        </form>
 
        <script>
        let eduForm = document.querySelectorAll(".edu-form")
        let container = document.querySelector("#form-container")
-       let addButton = document.querySelector("#add-form")
-       let totalForms = document.querySelector("#id_education-TOTAL_FORMS")
+       let addEduButton = document.querySelector("#add-Eduform")
+       let totalEduForms = document.querySelector("#id_education-TOTAL_FORMS")
 
-       let formNum = eduForm.length-1 // Get the number of the last form on the page with zero-based indexing
-        addButton.addEventListener('click', addForm)
+       let formEduNum = eduForm.length-1 // Get the number of the last form on the page with zero-based indexing
+        addEduButton.addEventListener('click', addEduForm)
 
-       function addForm(e) {
+       function addEduForm(e) {
            e.preventDefault()
            let newForm = eduForm[0].cloneNode(true) //Clone the bird form
            let formRegex = RegExp(`education-(\\d){1}-`,'g') //Regex to find all instances of the form number
-           formNum++ //Increment the form number
-            newForm.innerHTML = newForm.innerHTML.replace(formRegex, `education-${formNum}-`) //Update the new form to have the correct form number
-            container.insertBefore(newForm, addButton) //Insert the new form at the end of the list of forms
+           formEduNum++ //Increment the form number
+            newForm.innerHTML = newForm.innerHTML.replace(formRegex, `education-${formEduNum}-`) //Update the new form to have the correct form number
+            container.insertBefore(newForm, addEduButton) //Insert the new form at the end of the list of forms
 
-           totalForms.setAttribute('value', `${formNum+1}`) //Increment the number of total forms in the management form
+           totalEduForms.setAttribute('value', `${formEduNum+1}`) //Increment the number of total forms in the management form
        }
 
+
+
+       //Experience form Javascript codes
+       //variables to access experience form
+       let expForm = document.querySelectorAll(".exp-form")
+       {#let container = document.querySelector("#form-container")#}
+       let addExpButton = document.querySelector("#add-Expform")
+       let totalExpForms = document.querySelector("#id_experience-TOTAL_FORMS")
+
+       let formExpNum = expForm.length-1 // Get the number of the last form on the page with zero-based indexing
+        addExpButton.addEventListener('click', addExpForm)
+
+       function addExpForm(e) {
+           e.preventDefault()
+           let newExpForm = expForm[0].cloneNode(true) //Clone the bird form
+           console.log("test")
+           let formRegex = RegExp(`experience-(\\d){1}-`,'g') //Regex to find all instances of the form number
+           formExpNum++ //Increment the form number
+            newExpForm.innerHTML = newExpForm.innerHTML.replace(formRegex, `experience-${formExpNum}-`) //Update the new form to have the correct form number
+            {#container.insertBefore(newExpForm, addExpButton) //Insert the new form at the end of the list of forms#}
+            {#container.appendChild(newExpForm)#}
+           addExpButton.parentNode.insertBefore(newExpForm,addExpButton)
+           totalExpForms.setAttribute('value', `${formExpNum+1}`) //Increment the number of total forms in the management form
+       }
        </script>
 
 
