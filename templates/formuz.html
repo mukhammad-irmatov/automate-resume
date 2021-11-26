@@ -66,6 +66,17 @@
            {% endfor %}
         <button id="add-Recomform" type="button">Add Recommendation form</button>
 
+
+       {#       OtherDocuments form#}
+       {{ otherdocs_formset.management_form }}
+
+           {% for form in  otherdocs_formset %}
+                <div class="docs-form">
+                {{ form.as_p }}
+                </div>
+           {% endfor %}
+        <button id="add-docsform" type="button">Add Other documents form</button>
+
        <button type="submit">Submit form</button>
 
        </form>
@@ -117,7 +128,7 @@
        }
 
 
-
+        //Recommendation form Javascript codes
         let recomForm = document.querySelectorAll(".recom-form")
        let addRecomButton = document.querySelector("#add-Recomform")
        let totalRecomForms = document.querySelector("#id_recommend-TOTAL_FORMS")
@@ -137,6 +148,27 @@
            addRecomButton.parentNode.insertBefore(newForm,addRecomButton)
            totalRecomForms.setAttribute('value', `${formRecomNum+1}`) //Increment the number of total forms in the management form
        }
+
+
+            //Other documents formset area  javascript codes
+       let otherdocsForm = document.querySelectorAll(".docs-form")
+       let addOtherDocsButton = document.querySelector("#add-docsform")
+       let totalDocsForms = document.querySelector("#id_otherdocs-TOTAL_FORMS")
+
+       let formOtherDocsNum = otherdocsForm.length-1 // Get the number of the last form on the page with zero-based indexing
+        addOtherDocsButton.addEventListener('click', addOtherDocsForm)
+
+       function addOtherDocsForm(e) {
+           e.preventDefault()
+           let newForm = otherdocsForm[0].cloneNode(true) //Clone the bird form
+           let formRegex = RegExp(`otherdocs-(\\d){1}-`,'g') //Regex to find all instances of the form number
+           formOtherDocsNum++ //Increment the form number
+            newForm.innerHTML = newForm.innerHTML.replace(formRegex, `otherdocs-${formOtherDocsNum}-`) //Update the new form to have the correct form number
+            addOtherDocsButton.parentNode.insertBefore(newForm, addOtherDocsButton) //Insert the new form at the end of the list of forms
+
+           totalDocsForms.setAttribute('value', `${formOtherDocsNum+1}`) //Increment the number of total forms in the management form
+       }
+
        </script>
 
 

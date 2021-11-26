@@ -49,7 +49,7 @@ class UserForm_uz(models.Model):
     fullName = models.CharField(max_length=100)
 
     def __str__(self):
-        return self.fullName
+        return self.firstName+self.lastName
 
 class Education_uz(models.Model):
     form = models.ForeignKey(
