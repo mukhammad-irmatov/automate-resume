@@ -25,7 +25,7 @@ class AddFormView(TemplateView):
     def get(self, *args, **kwargs):
         # Create an instance of the formset
         EducationFormSet = modelformset_factory(Education_uz, form=EducationForm, extra=1)
-        education_formset = EducationFormSet(queryset=Education_uz.objects.none())
+        education_formset = EducationFormSet(queryset=Education_uz.objects.none(),prefix='education')
         my_form = MyForm(prefix="form")
         return self.render_to_response({'my_form':my_form,'education_formset':education_formset})
 
@@ -33,7 +33,7 @@ class AddFormView(TemplateView):
     # Define method to handle POST request
     def post(self, *args, **kwargs):
         EducationFormSet = modelformset_factory(Education_uz, form=EducationForm, extra=1)
-        education_formset = EducationFormSet(data = self.request.POST)
+        education_formset = EducationFormSet(data = self.request.POST,prefix='education')
         my_form = MyForm(self.request.POST,self.request.FILES,prefix='form')
         print(education_formset)
         print(my_form)
