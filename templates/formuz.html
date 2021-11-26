@@ -46,7 +46,7 @@
                 </div>
            {% endfor %}
        <button id="add-Eduform" type="button">Add Education form</button>
-<div class="experience_section">
+
         {{ experience_formset.management_form }}
 
            {% for form in  experience_formset %}
@@ -55,11 +55,23 @@
                 </div>
            {% endfor %}
         <button id="add-Expform" type="button">Add Experience form</button>
+
+{#       Recommendation form#}
+       {{ recommend_formset.management_form }}
+
+           {% for form in  recommend_formset %}
+                <div class="recom-form">
+                {{ form.as_p }}
+                </div>
+           {% endfor %}
+        <button id="add-Recomform" type="button">Add Recommendation form</button>
+
        <button type="submit">Submit form</button>
-</div>
+
        </form>
 
        <script>
+          //Education formset area  javascript codes
        let eduForm = document.querySelectorAll(".edu-form")
        let container = document.querySelector("#form-container")
        let addEduButton = document.querySelector("#add-Eduform")
@@ -102,6 +114,28 @@
             {#container.appendChild(newExpForm)#}
            addExpButton.parentNode.insertBefore(newExpForm,addExpButton)
            totalExpForms.setAttribute('value', `${formExpNum+1}`) //Increment the number of total forms in the management form
+       }
+
+
+
+        let recomForm = document.querySelectorAll(".recom-form")
+       let addRecomButton = document.querySelector("#add-Recomform")
+       let totalRecomForms = document.querySelector("#id_recommend-TOTAL_FORMS")
+
+       let formRecomNum = recomForm.length-1 // Get the number of the last form on the page with zero-based indexing
+        addRecomButton.addEventListener('click', addRecomForm)
+
+          function addRecomForm(e) {
+           e.preventDefault()
+           let newForm = recomForm[0].cloneNode(true) //Clone the bird form
+           console.log("test")
+           let formRegex = RegExp(`recommend-(\\d){1}-`,'g') //Regex to find all instances of the form number
+           formRecomNum++ //Increment the form number
+            newForm.innerHTML = newForm.innerHTML.replace(formRegex, `recommend-${formRecomNum}-`) //Update the new form to have the correct form number
+            {#container.insertBefore(newExpForm, addExpButton) //Insert the new form at the end of the list of forms#}
+            {#container.appendChild(newExpForm)#}
+           addRecomButton.parentNode.insertBefore(newForm,addRecomButton)
+           totalRecomForms.setAttribute('value', `${formRecomNum+1}`) //Increment the number of total forms in the management form
        }
        </script>
 
