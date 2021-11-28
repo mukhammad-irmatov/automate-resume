@@ -36,13 +36,14 @@
        <form method="POST" role="form" enctype="multipart/form-data" id="form-container">
     {% csrf_token %}
     <h2>Add new Form</h2>
-{{ my_form.as_p }}
+{#{{ my_form.lastName|as_crispy_field }}#}
+ {{ my_form|crispy }}
 
     {{ education_formset.management_form }}
 
            {% for form in  education_formset %}
                 <div class="edu-form">
-                {{ form.as_p }}
+                {{ form|crispy }}
                 </div>
            {% endfor %}
        <button id="add-Eduform" type="button">Add Education form</button>
@@ -51,28 +52,28 @@
 
            {% for form in  experience_formset %}
                 <div class="exp-form">
-                {{ form.as_p }}
+                {{ form|crispy }}
                 </div>
            {% endfor %}
         <button id="add-Expform" type="button">Add Experience form</button>
 
-{#       Recommendation form#}
+       Recommendation form
        {{ recommend_formset.management_form }}
 
            {% for form in  recommend_formset %}
                 <div class="recom-form">
-                {{ form.as_p }}
+                {{ form|crispy }}
                 </div>
            {% endfor %}
         <button id="add-Recomform" type="button">Add Recommendation form</button>
 
 
-       {#       OtherDocuments form#}
+              OtherDocuments form
        {{ otherdocs_formset.management_form }}
 
            {% for form in  otherdocs_formset %}
                 <div class="docs-form">
-                {{ form.as_p }}
+                {{ form|crispy }}
                 </div>
            {% endfor %}
         <button id="add-docsform" type="button">Add Other documents form</button>
@@ -420,65 +421,31 @@
 {##}
 {#    </div>#}
 {##}
-{#    <div class="row">#}
-{#        <div class="col-12">#}
+{##}
+{#  <div class="col-sm-12">#}
 {#            <label for="">14. Меҳнат фаолияти</label>#}
 {#                <hr class="border border-info">#}
-{#            <table class="table table-responsive">#}
-{#                <th class="row">#}
-{#                    <td class="col-md-2 border-bottom border-top py-2 border-secondary">#}
-{#                        Қабул қилинган сана</td>#}
-{#                    <td class="col-md-3 border-bottom border-top py-2 border-secondary">#}
-{#                        <i class="fal fa-sort-circle text-info icon_sort"></i>#}
-{#                        Ишдан бушатиш санаси</td>#}
-{#                    <td class="col-md-2 border-bottom border-top py-2 border-secondary">#}
-{#                        <i class="fal fa-sort-circle text-info icon_sort"></i>#}
-{#                        Ташкилот (корхона) номи</td>#}
-{#                    <td class="col-md-2 border-bottom border-top py-2 border-secondary">#}
-{#                        <i class="fal fa-sort-circle text-info icon_sort"></i>#}
-{#                        Қайси лавозимда</td>#}
-{#                        <td class="col-md-2 border-bottom border-top py-2 border-secondary">#}
-{#                        <i class="fal fa-sort-circle text-info icon_sort"></i>#}
-{#                        Ташкилот манзили</td>#}
-{#                    <td class="col-md-1 border-bottom border-top py-2 border-secondary">#}
-{#                        <div class="text-center">#}
-{#                            <button class="btn-sm border-0 btn-success" data-toggle="modal" data-target="#experienceModal">#}
-{#                                <i class="fal fa-plus"></i>#}
-{#                            </button>#}
-{##}
-{#                             <!-- The Modal -->#}
-{#  <div class="modal fade" id="experienceModal">#}
-{#    <div class="modal-dialog">#}
-{#      <div class="modal-content">#}
-{##}
-{#        <!-- Modal Header -->#}
-{#        <div class="modal-header">#}
-{#          <h4 class="modal-title">Янги ёзувни кўшиш </h4>#}
-{#          <button type="button" class="close" data-dismiss="modal">X</button>#}
-{#        </div>#}
-{##}
-{#        <!-- Modal body -->#}
-{#        <div class="modal-body">#}
-{#         <div class="row was-validated text-left">#}
-{#        <div class="col-md-6">#}
-{#            <label for="acceptedDate">Қабул қилинган сана</label>#}
-{#            <input type="date" class="form-control is-valid d-block" id="validationServer01" placeholder="Қабул қилинган сана"#}
+{#        <div class="row">#}
+{#            <div class="col-sm-4 ">#}
+{#            <label for="startdate">Қабул қилинган сана</label>#}
+{#            <input type="date" class="form-control is-valid d-block" id="validationServer01" placeholder="Кабул қилинган сана"#}
 {#                 >#}
 {#        </div>#}
-{##}
-{#        <div class="col-md-6 ">#}
+{#            <div class="col-sm-4 ">#}
 {#            <label for="endedDate">Ишдан бўшатиш санаси</label>#}
 {#            <input type="date" class="form-control is-valid d-block" id="validationServer01" placeholder="Ишдан бўшатиш санаси"#}
 {#                 >#}
 {#        </div>#}
-{#                <div class="col-md-12" >#}
-{#                 <label for="OrganizationName" class="text-left">Ташкилот (корхона) номи</label>#}
-{#                 <input type="text" name="organizationName" class="form-control is-valid" placeholder="Ташкилот(корхона) номи" >#}
+{#    <div class="col-sm-4" >#}
+{#                 <label for="careerPath" class="text-left">Кайси лавозимда</label>#}
+{#                 <input type="text" name="careerPath" class="form-control is-valid" placeholder="Кайси лавозимда" >#}
 {#             </div>#}
+{#</div>#}
+{#            <div class="row mb-4">#}
 {##}
-{#             <div class="col-sm-6">#}
-{#            <label for="degree">Кандай лавозимда</label>#}
-{#            <input type="text" class="form-control is-valid d-block" id="validationServer01" placeholder="Кандай лавозимда ишлагансиз"#}
+{#            <div class="col-sm-6">#}
+{#            <label for="FirmName">Ташкилот (корхона) номи</label>#}
+{#            <input type="text" class="form-control is-valid d-block" id="validationServer01" placeholder="Ташкилот (корхона) номи"#}
 {#                 >#}
 {#        </div>#}
 {##}
@@ -487,37 +454,17 @@
 {#            <input type="text" class="form-control is-valid d-block" id="validationServer01" placeholder="Ташкилот манзили"#}
 {#                 >#}
 {#        </div>#}
-{#             <div class="col-sm-12" >#}
-{#                 <label for="diplomnumber" class="text-left">Серия ва диплом № </label>#}
-{#                 <input type="text" name="diplomnumber" class="form-control is-valid" placeholder="Серия ва диплом № ">#}
-{#             </div>#}
 {##}
-{#        </div>#}
-{#        </div>#}
-{##}
-{#        <!-- Modal footer -->#}
-{#        <div class="modal-footer">#}
-{#            <button type="submit" class="btn btn-success">Сақлаш</button>#}
-{#          <button type="button" class="btn btn-danger" data-dismiss="modal">Бекор қилиш</button>#}
-{#        </div>#}
-{##}
-{#      </div>#}
-{#    </div>#}
-{#  </div>#}
-{##}
-{##}
-{#                            <button class="btn-sm border-0 btn-success">#}
-{#                                <i class="fal fa-trash"></i>#}
+{#            </div>#}
+{#            <div class="d-flex justify-content-end">#}
+{#            <button class="btn-sm border-0 btn-success" id="add-form">#}
+{#                                <i class="fal fa-plus"></i> Яна қўшиш#}
 {#                            </button>#}
-{#                        </div>#}
-{#                    </td>#}
-{#                </th>#}
-{#            </table>#}
-{#            <p class="text-info text-center">#}
-{#                Маълумотлар топилмади. Илтимос, янги ёзувни киритиш учун `кўшиш` тугмачасини босинг.#}
-{#            </p>#}
+{#            </div>#}
+{# <hr class="border border-info">#}
 {#        </div>#}
-{#    </div>#}
+{#        </div>#}
+{##}
 {##}
 {#    <div class="row">#}
 {#        <div class="col-12">#}
@@ -692,84 +639,34 @@
 {#            <span class="index-info">“йўқ”, агар “ҳа” жавоби бўлса: қаерда; қачон ва нима учун; МжК ёки ЖКнинг қайси банди бўйича</span>#}
 {#        </div>#}
 {##}
-{#        <div class="col-12">#}
-{#            <label for="" >#}
-{#                24. Ишлаган жойингиздан раҳбар ёки ҳамкасблардан ким Сизга тавсиянома бера олади#}
+{#        <div class="col-sm-12">#}
+{#            <label for="">24. Ишлаган жойингиздан раҳбар ёки ҳамкасблардан ким Сизга тавсиянома бера олади</label>#}
 {#                <hr class="border border-info">#}
-{#            </label>#}
+{#        <div class="row mb-3">#}
+{#            <div class="col-sm-4 ">#}
+{#            <label for="startdate">Ф.И.Ш. (тўлиқ)</label>#}
+{#            <input type="date" class="form-control is-valid d-block" id="validationServer01" placeholder="Кабул қилинган сана"#}
+{#                 >#}
 {#        </div>#}
-{#        <table class="table table-responsive">#}
-{#            <th class="row">#}
-{#                <td class="col-md-3 border-bottom border-top py-2 border-secondary">#}
-{#                    Ф.И.Ш. (тўлиқ)</td>#}
-{#                <td class="col-md-3 border-bottom border-top py-2 border-secondary">#}
-{#                    <i class="fal fa-sort-circle text-info icon_sort"></i>#}
-{#                    Иш жойи, лавозими</td>#}
-{#                <td class="col-md-3 border-bottom border-top py-2 border-secondary">#}
-{#                    <i class="fal fa-sort-circle text-info icon_sort"></i>#}
-{#                    Телефон рақами, е-mail</td>#}
-{#                <td class="col-md-3 border-bottom border-top py-2 border-secondary">#}
-{#                    <div class="text-center">#}
-{#                        <button class="btn-sm border-0 btn-success"  data-toggle="modal" data-target="#recommendModel">#}
-{#                            <i class="fal fa-plus"></i>#}
-{#                        </button>#}
-{##}
-{#                                                     <!-- The Modal -->#}
-{#  <div class="modal fade" id="recommendModel">#}
-{#    <div class="modal-dialog">#}
-{#      <div class="modal-content">#}
-{##}
-{#        <!-- Modal Header -->#}
-{#        <div class="modal-header">#}
-{#          <h4 class="modal-title">Янги ёзувни кўшиш </h4>#}
-{#          <button type="button" class="close" data-dismiss="modal">X</button>#}
+{#            <div class="col-sm-4 ">#}
+{#            <label for="endedDate">Иш жойи, лавозими</label>#}
+{#            <input type="date" class="form-control is-valid d-block" id="validationServer01" placeholder="Ишдан бўшатиш санаси"#}
+{#                 >#}
 {#        </div>#}
-{##}
-{#        <!-- Modal body -->#}
-{#        <div class="modal-body modal-responsive">#}
-{#         <div class="row was-validated text-left">#}
-{##}
-{#                <div class="col-sm-12" >#}
-{#                 <label for="OrganizationName" class="text-left">Ф.И.Ш. (тўлик)</label>#}
-{#                 <input type="text" name="organizationName" class="form-control is-valid" placeholder="Ф.И.Ш. (тўлик)" >#}
+{#    <div class="col-sm-4" >#}
+{#                 <label for="careerPath" class="text-left">Телефон рақами, е-mail</label>#}
+{#                 <input type="text" name="careerPath" class="form-control is-valid" placeholder="Кайси лавозимда" >#}
 {#             </div>#}
+{#</div>#}
 {##}
-{#             <div class="col-sm-12">#}
-{#            <label for="degree">Иш жойи, лавозими</label>#}
-{#            <input type="text" class="form-control is-valid d-block" id="validationServer01" placeholder="Иш жойи, лавозими"#}
-{#                 >#}
-{#        </div>#}
-{##}
-{#        <div class="col-sm-12 ">#}
-{#            <label for="degree">Телефон рақами, e-mail</label>#}
-{#            <input type="text" class="form-control is-valid d-block" id="validationServer01" placeholder="Ташкилот манзили"#}
-{#                 >#}
-{#        </div>#}
-{##}
+{#            <div class="d-flex justify-content-end">#}
+{#            <button class="btn-sm border-0 btn-success" id="add-form">#}
+{#                                <i class="fal fa-plus"></i> Яна қўшиш#}
+{#                            </button>#}
+{#            </div>#}
+{# <hr class="border border-info">#}
 {#        </div>#}
 {#        </div>#}
-{##}
-{#        <!-- Modal footer -->#}
-{#        <div class="modal-footer">#}
-{#            <button type="submit" class="btn btn-success">Сақлаш</button>#}
-{#          <button type="button" class="btn btn-danger" data-dismiss="modal">Бекор қилиш</button>#}
-{#        </div>#}
-{##}
-{#      </div>#}
-{#    </div>#}
-{#  </div>#}
-{##}
-{#                        <button class="btn-sm border-0 btn-success">#}
-{#                            <i class="fal fa-trash"></i>#}
-{#                        </button>#}
-{#                    </div>#}
-{#                </td>#}
-{#            </th>#}
-{#        </table>#}
-{#        <div class="col-12">#}
-{#            <p class="text-center text-info">Маълумотлар топилмади. Илтимос, янги ёзувни киритиш учун `кўшиш` тугмачасини босинг.</p>#}
-{#        </div>#}
-{#    </div>#}
 {##}
 {#    <div class="row">#}
 {#        <div class="col-12">#}
@@ -824,77 +721,37 @@
 {#            <input type="text" class="form-control" placeholder="Трудовая книжка">#}
 {#        </div>#}
 {#    </div>#}
-{##}
-{#    <div class="row">#}
-{#        <div class="col-12">#}
+{#<div class="row mb-3">#}
+{#           <div class="col-sm-12">#}
 {#            <label for="">Прочие документы</label>#}
-{#            <hr class="border border-info">#}
+{#                <hr class="border border-secondary">#}
+{#        <div class="row">#}
+{#            <div class="col-sm-4 ">#}
+{#            <label for="startdate">Документ</label>#}
+{#            <input type="date" class="form-control is-valid d-block" placeholder="Кабул қилинган сана"#}
+{#                 >#}
 {#        </div>#}
-{#        <table>#}
-{#            <th class="row">#}
-{#                <td class="col-md-3 border-bottom border-top py-2 border-secondary">Қабул қилинган сана</td>#}
-{#                <td class="col-md-8 border-bottom border-top py-2 border-secondary">#}
-{#                    <i class="fal fa-sort-circle text-info icon_sort"></i>#}
-{#                    Ўқув масканининг номланиши</td>#}
-{#                <td class="col-md-2 border-bottom border-top py-2 border-secondary">#}
-{#                    <div class="text-center">#}
-{#                        <button class="btn-sm border-0 btn-success" data-toggle="modal" data-target="#otherDocsModal">#}
-{#                            <i class="fal fa-plus"></i>#}
-{#                        </button>#}
-{##}
-{#                                                                <!-- The Modal -->#}
-{#  <div class="modal fade" id="otherDocsModal">#}
-{#    <div class="modal-dialog">#}
-{#      <div class="modal-content">#}
-{##}
-{#        <!-- Modal Header -->#}
-{#        <div class="modal-header">#}
-{#          <h4 class="modal-title">Янги ёзувни кўшиш </h4>#}
-{#          <button type="button" class="close" data-dismiss="modal">X</button>#}
-{#        </div>#}
-{##}
-{#        <!-- Modal body -->#}
-{#        <div class="modal-body modal-responsive">#}
-{#         <div class="row was-validated text-left">#}
-{##}
-{#                <div class="col-sm-12" >#}
-{#                 <label for="document" class="text-left">Хужжат</label>#}
-{#                 <input type="text" name="document" class="form-control is-valid" placeholder="Хужжат" >#}
-{#             </div>#}
-{##}
-{#             <div class="col-sm-12">#}
-{#            <label for="degree">Иш жойи, лавозими</label>#}
-{#            <input type="text" class="form-control is-valid d-block" id="validationServer01" placeholder="Хужжат ҳақида изоҳ"#}
+{#            <div class="col-sm-8 ">#}
+{#            <label for="endedDate">Комментарий к документу</label>#}
+{#            <input type="text" class="form-control is-valid d-block"  placeholder="Ишдан бўшатиш санаси"#}
 {#                 >#}
 {#        </div>#}
 {##}
+{#</div>#}
+{#</div>#}
 {#        </div>#}
-{#        </div>#}
+{#            <div class="d-flex justify-content-end">#}
+{#            <button class="btn-sm border-0 btn-success" id="add-form" >#}
+{#                                <i class="fal fa-plus"></i> Яна қўшиш#}
+{#                            </button>#}
+{#            </div>#}
 {##}
-{#        <!-- Modal footer -->#}
-{#        <div class="modal-footer">#}
-{#            <button type="submit" class="btn btn-success">Сақлаш</button>#}
-{#          <button type="button" class="btn btn-danger" data-dismiss="modal">Бекор қилиш</button>#}
-{#        </div>#}
+{# <hr class="border border-secondary">#}
 {##}
-{#      </div>#}
-{#    </div>#}
-{#  </div>#}
-{#                        <button class="btn-sm border-0 btn-success">#}
-{#                            <i class="fal fa-trash"></i>#}
-{#                        </button>#}
-{#                    </div>#}
-{#                </td>#}
-{#            </th>#}
-{#        </table>#}
-{#        <div class="col-12">#}
-{#            <p class="text-center text-info">Маълумотлар топилмади. Илтимос, янги ёзувни киритиш учун `кўшиш` тугмачасини босинг.#}
-{#                <hr class="border border-info">#}
-{#            </p>#}
-{#        </div>#}
-{#    </div>#}
 {##}
-{#    <div class="row was-validated">#}
+{##}
+{##}
+{#    <div class="row">#}
 {#        <div class="col-12">#}
 {#            <label for="">ФИО</label>#}
 {#            <input type="text" class="form-control" required>#}
@@ -919,9 +776,9 @@
 {#        </div>#}
 {#    </section>#}
 {#</form>#}
-{##}
-{##}
-{##}
+
+
+
 </body>
 {% endblock content %}
 </html>

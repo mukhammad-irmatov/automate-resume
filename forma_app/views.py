@@ -86,29 +86,4 @@ class AddFormView(TemplateView):
 
 
 
-# def AddFormView(request):
-#     EducationFormSet = modelformset_factory(Education_uz, form=EducationForm, extra=1)
-#
-#     if request.method == 'POST':
-#         my_form = MyForm(request.POST, request.FILES, prefix='form')
-#         education_formset = EducationFormSet(request.POST, request.FILES, prefix='education')
-#         # experience_form = ExperienceForm(request.POST, request.FILES, prefix='experience')
-#         if all([my_form.is_valid(), education_formset.is_valid()]):
-#             print(request.POST)
-#             print(request.FILES)
-#             form = my_form.save()
-#             education = education_formset.save(commit=False)
-#             education.form = form
-#             education.save()
-#
-#
-#             return redirect('dashboard')
-#     else:
-#         my_form = MyForm(prefix='form')
-#         EducationFormSet = modelformset_factory(Education_uz, form=EducationForm, extra=1)
-#         education_formset = EducationFormSet(request.GET or None,queryset=Education_uz.objects.none())
-#
-#     return render(request, 'formuz.html', {'my_form': my_form, 'education_formset': education_formset})
-
-
 
