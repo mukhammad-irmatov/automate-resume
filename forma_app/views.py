@@ -2,7 +2,7 @@ from django.shortcuts import redirect, render
 from django.http import HttpResponse
 from django.urls import reverse_lazy, reverse
 from django.views.generic import TemplateView,ListView,CreateView
-from .models import UserForm_uz,Education_uz,Experience_uz,Recommendation_uz,OtherDocuments
+from .models import UserForm_uz,Education_uz,Experience_uz,Recommendation_uz,OtherDocuments,Job
 from .forms import MyForm,EducationForm,ExperienceForm,RecommendationForm,OtherDocumentsForm
 from django.forms import modelformset_factory
 
@@ -14,6 +14,13 @@ class adminPanelView(ListView):
 class allApplicants(ListView):
     model = UserForm_uz
     template_name = 'all_applicants.html'
+    context_object_name = 'allApplicants'
+
+class AddJobView(CreateView):
+    model = Job
+    template_name = "add_job.html"
+    fields = ["jobName","education","workExperience","personalSkills","languages"]
+    success_url = reverse_lazy('dashboard')
 
 
 class AddFormView(TemplateView):

@@ -3,14 +3,21 @@ from django.db import models
 # Create your models here.
 
 
-# class JobForm(models.Model):
-#     jobName = models.CharField(max_length=300)
+class Job(models.Model):
+    jobName = models.CharField(max_length=200)
+    education = models.CharField(max_length=100)
+    workExperience = models.CharField(max_length=100)
+    personalSkills = models.CharField(max_length=150)
+    languages = models.CharField(max_length=100)
+    def __str__(self):
+        return self.jobName
+
 class UserForm_uz(models.Model):
     rasm = models.ImageField(upload_to='media/rasmlar',null=True,blank=True)
-    # jobName = models.ForeignKey(
-    #     JobForm.jobName,
-    #     on_delete=models.CASCADE
-    # )
+    jobName = models.ForeignKey(
+        Job,
+        on_delete=models.CASCADE
+    )
     lastName = models.CharField(max_length=200)
     firstName = models.CharField(max_length=200)
     middleName = models.CharField(max_length=200,blank=True,null=True)
@@ -31,8 +38,8 @@ class UserForm_uz(models.Model):
     yutuqlar = models.CharField(max_length=200,blank=True,null=True)
     leaving_work_reason = models.CharField(max_length=200,blank=True,null=True)
     main_skills = models.CharField(max_length=300,blank=True,null=True)
-    personalSkills = models.CharField(max_length=150,blank=True,null=True)
-    readinessWork = models.CharField(max_length=150,blank=True,null=True)
+    personalSkills = models.CharField(max_length=50,blank=True,null=True)
+    readinessWork = models.CharField(max_length=50,blank=True,null=True)
     hobby = models.CharField(max_length=150,blank=True,null=True)
     hobby_boshqa = models.CharField(max_length=200,blank=True,null=True)
     expected_salary = models.CharField(max_length=100,blank=True,null=True)

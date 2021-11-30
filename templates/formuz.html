@@ -53,6 +53,9 @@
     </div>
 
     <div class="row">
+    <div class="col-md-12 mb-3 was-validated">
+            {{ my_form.jobName|as_crispy_field }}
+        </div>
         <div class="col-md-4 mb-3 was-validated">
             {{ my_form.lastName|as_crispy_field }}
         </div>

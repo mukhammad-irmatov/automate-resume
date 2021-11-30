@@ -65,7 +65,7 @@
                   </li>
                   <li><a><i class="fa fa-cubes"></i> Иш эълонлари <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
-                      <li><a href="#"><b> + Иш эълони қўшиш</b></a></li>
+                      <li><a href="{% url 'addjob' %}"><b> + Иш эълони қўшиш</b></a></li>
                       {% for object in kategoriya %}
                         <li>
                           <a href="#">obyekt</a>
@@ -150,4 +150,5 @@
         <!-- /footer content -->
       </div>
     </div>
+</body>
 </html>

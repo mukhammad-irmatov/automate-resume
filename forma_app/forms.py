@@ -1,5 +1,5 @@
 from django import forms
-from .models import UserForm_uz,Education_uz,Experience_uz,Recommendation_uz,OtherDocuments
+from .models import UserForm_uz,Education_uz,Experience_uz,Recommendation_uz,OtherDocuments,Job
 from django.forms import modelformset_factory
 
 marriage_choices = [('Married', 'Уйланган'),
@@ -11,12 +11,12 @@ computer_choices = [('0', 'Эга эмас'),
                     ('2', 'Ўртача'),
                     ('3', 'Жуда яхши'),
                     ('4', 'Мукаммал ўзлаштирган'), ]
-language_choices = [('1', 'Билмайман'),
+language_choices = (('1', 'Билмайман'),
                     ('2', 'Ёмон'),
                     ('3', 'Лугат ёрдамида'),
                     ('4', 'Ўртача'),
                     ('5', 'Яхши'),
-                    ('6', 'Жуда яхши'), ]
+                    ('6', 'Жуда яхши'), )
 personalSkills_choices = [('интизомли', 'интизомли'),
                     ('1', 'ижрочи'),
                     ('2', 'тиришқоқ'),
@@ -46,6 +46,7 @@ agreement_choices = [('Yes', 'Ха'),
                     ('No', 'Йўк')]
 class MyForm(forms.ModelForm):
     rasm  =forms.ImageField(label='Расмингизни киритинг')
+    jobName = forms.ModelChoiceField(label="Ваканцияни танланг",queryset=Job.objects.all())
     lastName = forms.CharField(label='1. Фамилия', widget=forms.TextInput(attrs={'placeholder': 'Фамилиянгизни киритинг'}))
     firstName = forms.CharField(label='2. Исм', widget=forms.TextInput(attrs={'placeholder': 'Исмингизни киритинг'}))
     middleName = forms.CharField(label='3. Шарифингиз', widget=forms.TextInput(attrs={'placeholder': 'Шарифингизни киритинг'}))
@@ -78,7 +79,7 @@ class MyForm(forms.ModelForm):
     homeNumber = forms.CharField(label='уй телефон рақами', widget=forms.TextInput(attrs={'placeholder': 'уй телефон рақами'}))
     phoneNumber = forms.CharField(label='мобил алоқа', widget=forms.TextInput(attrs={'placeholder': 'мобил алоқа'}))
     email = forms.CharField(label='e-mail', widget=forms.TextInput(attrs={'placeholder': 'e-mail'}))
-    additional_info = forms.CharField(label='26. Ўзингиз ҳақингизда яна нималарни қўшимча қила оласиз', widget=forms.TextInput(attrs={'placeholder': '26. Ўзингиз ҳақингизда яна нималарни қўшимча қила оласиз'}))
+    additional_info = forms.CharField(label='26. Ўзингиз ҳақингизда яна нималарни қўшимча қила оласиз', widget=forms.TextInput(attrs={'placeholder': 'Ўзингиз ҳақингизда яна нималарни қўшимча қила оласиз'}))
     approve_info = forms.ChoiceField(label='27. Ушбу резюмеда кўрсатилган маълумотларни тасдиқлайсизми ',choices=approve_choices, widget=forms.RadioSelect())
     agreement = forms.ChoiceField(label='28. Шахсий маълумотларингизни қайта ишлашимизга (ўрганишимизга) розилик берасизми',choices=agreement_choices, widget=forms.RadioSelect())
     passport_file = forms.FileField(label='Шахсни тасдиқловчи ҳужжат (Номзоднинг паспорти)')
@@ -116,7 +117,7 @@ class ExperienceForm(forms.ModelForm):
         model = Experience_uz
         exclude = ['form']
 
-# firstName = forms.CharField(label='2. Исм', widget=forms.TextInput(attrs={'placeholder': 'Исмингизни киритинг'}))
+
 class RecommendationForm(forms.ModelForm):
     fullName = forms.CharField(label='Ф.И.Ш. (тўлиқ)', widget=forms.TextInput(attrs={'placeholder': 'Ф.И.Ш. (тўлиқ)'}))
     workPlace = forms.CharField(label='Иш жойи, лавозими', widget=forms.TextInput(attrs={'placeholder': 'Иш жойи, лавозими'}))
@@ -134,4 +135,9 @@ class OtherDocumentsForm(forms.ModelForm):
         model = OtherDocuments
         exclude = ['form']
 
-
+class JobForm(forms.ModelForm):
+    jobName = forms.CharField(label='Ваканция номи')
+    class Meta:
+        model = Job
+        fields = "__all__"
+# firstName = forms.CharField(label='2. Исм', widget=forms.TextInput(attrs={'placeholder': 'Исмингизни киритинг'}))
