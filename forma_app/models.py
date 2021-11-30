@@ -59,9 +59,12 @@ class UserForm_uz(models.Model):
     diplom_file = models.FileField(upload_to='media/fayllar')
     trudovoyKnishka = models.FileField(upload_to='media/fayllar',blank=True,null=True)
     fullName = models.CharField(max_length=100)
+    time = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
         return self.firstName+ " " +self.lastName
+    class Meta:
+        ordering = ['-time']
 
 class Education_uz(models.Model):
     form = models.ForeignKey(

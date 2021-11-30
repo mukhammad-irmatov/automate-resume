@@ -44,6 +44,12 @@ approve_choices = [('Ха', 'Ха'),
                     ('Йўк', 'Йўк')]
 agreement_choices = [('Ха', 'Ха'),
                     ('Йўк', 'Йўк')]
+
+days_choices = [('1', 'Душанба'),
+                    ('2', 'Сешанба'),
+                    ('3', 'Чоршанба'),
+                    ('4', 'Пайшанба'),
+                    ('5', 'Жуъма'), ]
 class MyForm(forms.ModelForm):
     rasm  =forms.ImageField(label='Расмингизни киритинг')
     jobName = forms.ModelChoiceField(label="Ваканцияни танланг",queryset=Job.objects.all())
@@ -89,7 +95,8 @@ class MyForm(forms.ModelForm):
 
     class Meta:
         model = UserForm_uz
-        fields = '__all__'
+        # fields = '__all__'
+        exclude = ['time']
 
 
 
@@ -148,3 +155,9 @@ class JobForm(forms.ModelForm):
         model = Job
         fields = "__all__"
 # firstName = forms.CharField(label='2. Исм', widget=forms.TextInput(attrs={'placeholder': 'Исмингизни киритинг'}))
+
+# class InterviewForm(forms.Form):
+#     days = forms.MultipleChoiceField(label="Интервю кунларини белгиланг",choices=forms.CheckboxSelectMultiple())
+#     time = forms.TimeInput()
+#
+    # personalSkills = forms.ChoiceField(label='17. Шахсий фазилатларингиз',choices=personalSkills_choices,widget=forms.CheckboxSelectMultiple())

@@ -5,7 +5,17 @@ from django.views.generic import TemplateView,ListView,CreateView
 from .models import UserForm_uz,Education_uz,Experience_uz,Recommendation_uz,OtherDocuments,Job
 from .forms import MyForm,EducationForm,ExperienceForm,RecommendationForm,OtherDocumentsForm,JobForm
 from django.forms import modelformset_factory
+from django.conf import settings
+from twilio.rest import Client
 
+def smsView(request):
+    client = Client(settings.TWILIO_ACCOUNT_SID, settings.TWILIO_AUTH_TOKEN)
+
+    message = client.messages.create(to='+998993451598', from_='+12347040890', body='Assalomu aleykum Hurmatli ish qidiruvchi')
+
+    print(message.sid)
+
+    return HttpResponse("Rahmat SMS muvaffaqiyatli yuborildi")
 
 class adminPanelView(ListView):
     model = UserForm_uz
@@ -15,6 +25,7 @@ class allApplicants(ListView):
     model = UserForm_uz
     template_name = 'all_applicants.html'
     context_object_name = 'allApplicants'
+    ordering = ['time']
 
 class AddJobView(CreateView):
     form_class = JobForm

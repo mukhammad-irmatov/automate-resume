@@ -9,6 +9,7 @@ django-crispy-forms = "*"
 django-shapeshifter = "*"
 django-multi-form-view = "*"
 six = "*"
+twilio = "*"
 
 [dev-packages]
 

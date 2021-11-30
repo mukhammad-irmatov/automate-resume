@@ -29,6 +29,13 @@ ALLOWED_HOSTS = []
 
 
 # Application definition
+TWILIO_ACCOUNT_SID = os.getenv("ACfe40a932a05078e5b02a581d9987a351")
+TWILIO_AUTH_TOKEN = os.getenv("3fc88842f8bfc633f435a10f770441db")
+TWILIO_NUMBER = os.getenv("+12347040890")
+SMS_BROADCAST_TO_NUMBERS = [
+    "+998993451598",
+
+]
 
 INSTALLED_APPS = [
     'django.contrib.admin',
