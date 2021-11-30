@@ -2,21 +2,21 @@ from django import forms
 from .models import UserForm_uz,Education_uz,Experience_uz,Recommendation_uz,OtherDocuments,Job
 from django.forms import modelformset_factory
 
-marriage_choices = [('Married', 'Уйланган'),
-                    ('Single', 'Бўйдок')]
-children_choices = [('Yes', 'Ха'),
-                    ('No', 'Йўк')]
-computer_choices = [('0', 'Эга эмас'),
-                    ('1', 'Бошлангич'),
-                    ('2', 'Ўртача'),
-                    ('3', 'Жуда яхши'),
-                    ('4', 'Мукаммал ўзлаштирган'), ]
-language_choices = (('1', 'Билмайман'),
-                    ('2', 'Ёмон'),
-                    ('3', 'Лугат ёрдамида'),
-                    ('4', 'Ўртача'),
-                    ('5', 'Яхши'),
-                    ('6', 'Жуда яхши'), )
+marriage_choices = [('Уйланган', 'Уйланган'),
+                    ('Бўйдок', 'Бўйдок')]
+children_choices = [('Ха', 'Ха'),
+                    ('Йўк', 'Йўк')]
+computer_choices = [('Эга эмас', 'Эга эмас'),
+                    ('Бошлангич', 'Бошлангич'),
+                    ('Ўртача', 'Ўртача'),
+                    ('Жуда яхши', 'Жуда яхши'),
+                    ('Мукаммал ўзлаштирган', 'Мукаммал ўзлаштирган'), ]
+language_choices = (('Билмайман', 'Билмайман'),
+                    ('Ёмон', 'Ёмон'),
+                    ('Лугат ёрдамида', 'Лугат ёрдамида'),
+                    ('Ўртача', 'Ўртача'),
+                    ('Яхши', 'Яхши'),
+                    ('Жуда яхши', 'Жуда яхши'), )
 personalSkills_choices = [('интизомли', 'интизомли'),
                     ('1', 'ижрочи'),
                     ('2', 'тиришқоқ'),
@@ -33,17 +33,17 @@ readinessWork_choices = [('1', '5 кунлик иш ҳафтаси'),
                     ('3', 'Командировка (яшаш жойи ўзгариши)'),
                     ('4', 'Иш жойи бощқа ҳудудга ўзгариши'),
                     ('5', 'Иш жойи бощқа давлатга ўзгариши'), ]
-hobby_choices = [('1', 'Китоблар'),
-                    ('2', 'Музей'),
-                    ('3', 'Кино'),
-                    ('4', 'Саёхат'),
-                    ('5', 'Театр'),
-                    ('6', 'Спорт'),
-                    ('7', 'Дўстлар давраси'), ]
-approve_choices = [('Yes', 'Ха'),
-                    ('No', 'Йўк')]
-agreement_choices = [('Yes', 'Ха'),
-                    ('No', 'Йўк')]
+hobby_choices = [('Китоблар', 'Китоблар'),
+                    ('Музей', 'Музей'),
+                    ('Кино', 'Кино'),
+                    ('Саёхат', 'Саёхат'),
+                    ('Театр', 'Театр'),
+                    ('Спорт', 'Спорт'),
+                    ('Дўстлар давраси', 'Дўстлар давраси'), ]
+approve_choices = [('Ха', 'Ха'),
+                    ('Йўк', 'Йўк')]
+agreement_choices = [('Ха', 'Ха'),
+                    ('Йўк', 'Йўк')]
 class MyForm(forms.ModelForm):
     rasm  =forms.ImageField(label='Расмингизни киритинг')
     jobName = forms.ModelChoiceField(label="Ваканцияни танланг",queryset=Job.objects.all())
@@ -91,6 +91,8 @@ class MyForm(forms.ModelForm):
         model = UserForm_uz
         fields = '__all__'
 
+
+
 class EducationForm(forms.ModelForm):
     startingDate  = forms.DateField(label='Қабул қилинган сана',widget=forms.DateInput(format='%d/%m/%Y',attrs={'placeholder': '20/01/1995'}),
                                 input_formats=['%d/%m/%Y',])
@@ -136,12 +138,12 @@ class OtherDocumentsForm(forms.ModelForm):
         exclude = ['form']
 
 class JobForm(forms.ModelForm):
-    jobName = forms.CharField(label='Ваканция номи', widget=forms.TextInput(attrs={'placeholder': 'Ваканция номи'}))
-    education = forms.CharField(label='Маълумоти', widget=forms.TextInput(attrs={'placeholder': 'Мисол учун: orta maxsus, oliy'}))
-    workExperience = forms.CharField(label='Иш тажрибаси', widget=forms.TextInput(attrs={'placeholder': 'Мисол учун: 3 yillik tajriba'}))
-    personalSkills = forms.CharField(label='Шахсий сифатлари', widget=forms.TextInput(attrs={'placeholder': 'Мисол учун: chet tillarida faol'}))
-    languages = forms.CharField(label='Тиллар', widget=forms.TextInput(attrs={'placeholder': 'Мисол учун: Xitoy tili - Сўзлашув, Рус тили - erkin, Узбек тили - erkin'}))
-    Place = forms.CharField(label='Иш жойи', widget=forms.TextInput(attrs={'placeholder': 'Мисол учун: Тошкент вилояти'}))
+    jobName = forms.CharField(label='Ваканция номи', widget=forms.TextInput(attrs={'placeholder': 'ваканция номи'}))
+    education = forms.CharField(label='Маълумоти', widget=forms.TextInput(attrs={'placeholder': 'мисол учун: orta maxsus, oliy'}))
+    workExperience = forms.CharField(label='Иш тажрибаси', widget=forms.TextInput(attrs={'placeholder': 'мисол учун: 3 yillik tajriba'}))
+    personalSkills = forms.CharField(label='Шахсий сифатлари',required=False, widget=forms.TextInput(attrs={'placeholder': 'мисол учун: chet tillarida faol'}))
+    languages = forms.CharField(label='Тиллар', required=False,widget=forms.TextInput(attrs={'placeholder': 'мисол учун: Xitoy tili - Сўзлашув, Рус тили - erkin, Узбек тили - erkin'}))
+    Place = forms.CharField(label='Иш жойи', required=False,widget=forms.TextInput(attrs={'placeholder': 'мисол учун: Тошкент вилояти'}))
     class Meta:
         model = Job
         fields = "__all__"

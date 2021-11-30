@@ -21,6 +21,11 @@ class AddJobView(CreateView):
     template_name = "add_job.html"
     success_url = reverse_lazy('all_jobs')
 
+# class InterviewCreateView(CreateView):
+#     form_class = JobForm
+#     template_name = "add_job.html"
+#     success_url = reverse_lazy('all_jobs')
+
 class AllJobsView(ListView):
     model = Job
     template_name = 'allJobs.html'
