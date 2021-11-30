@@ -30,29 +30,32 @@
               <thead>
                 <tr>
                   <th>ID</th>
-                  <th>Yoshi</th>
-                  <th>Manzili </th>
-                  <th>Telefon</th>
-                  <th>Ish turi</th>
-                  <th>Ish tajribasi</th>
-                  <th>Ta'lim turi</th>
+                  <th>Туғилган йили</th>
+                  <th>Манзили </th>
+                  <th>Телефон рақами</th>
+                  <th>Ваканция номи</th>
+                  <th>Иш тажрибаси</th>
+                  <th>Биладиган тиллар</th>
                   <th><a href="#" class="btn btn-outline-secondary">Resume qo'shish</a></th>
 
                 </tr>
               </thead>
               <tbody>
-
+            {% for applicant in allApplicants %}
                 <tr>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
+                  <td>{{ applicant.id }}</td>
+                  <td>{{ applicant.birthData }}</td>
+                  <td>{{ applicant.birthPlace }}</td>
+                  <td>{{ applicant.phoneNumber }}</td>
+                  <td>Кончилик</td>
+                  <td>{{ applicant.work_experience }}</td>
+                  <td>Ўзбек тили: {{ applicant.language_uzbek }}<br>
+                      Рус тили: {{ applicant.language_russian }}<br>
+                      Инглиз: {{ applicant.language_english }}
+                  </td>
                   <td><a href="#" class="btn btn-outline-secondary">Batafsil</a></td>
                 </tr>
-
+            {% endfor %}
               </tbody>
             </table>
   

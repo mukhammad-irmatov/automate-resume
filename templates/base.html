@@ -33,7 +33,7 @@
         <div class="col-md-3 left_col menu_fixed">
           <div class="left_col scroll-view">
             <div class="navbar nav_title" style="border: 0;">
-              <a href="#" class="site_title"><i><img src="{% static 'images/logo.png' %}" style="width: 40px;height: 40px;border-radius: 50%;"></i> <span>Metallurgiya</span></a>
+              <a href="#" class="site_title"><i><img src="{% static 'images/logo.png' %}" style="width: 40px;height: 40px;border-radius: 50%;"></i> <span>Металлургия</span></a>
             </div>
 
             <div class="clearfix"></div>
@@ -44,8 +44,8 @@
                 <img src="{% static 'images/icon.png' %}" alt="..." class="img-circle profile_img">
               </div>
               <div class="profile_info">
-                <span>Assalomu alaykum,</span>
-                <h2>Admin</h2>
+                <span>Ассалому Алейкум,</span>
+                <h2>admin</h2>
               </div>
             </div>
             <!-- /menu profile quick info -->
@@ -55,17 +55,17 @@
             <!-- sidebar menu -->
             <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
               <div class="menu_section">
-                <h3>Boshqaruv panel</h3>
+                <h3>Бошқарув панел</h3>
                 <ul class="nav side-menu">
-                  <li><a><i class="fa fa-users"></i> Barcha rezyumelar <span class="fa fa-chevron-down"></span></a>
+                  <li><a href="{% url 'all_applicants' %}"><i class="fa fa-users"></i> Барча резюмелар <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
-                      <li><a href="#">Intervyu belgilash</a></li>
-                      <li><a href="#">Intervyu vaqtlari</a></li>
+                      <li><a href="#">Интервю белгилаш</a></li>
+                      <li><a href="#">Интервю вақтлари</a></li>
                     </ul>
                   </li>
-                  <li><a><i class="fa fa-cubes"></i> Ish e'lonlari <span class="fa fa-chevron-down"></span></a>
+                  <li><a><i class="fa fa-cubes"></i> Иш эълонлари <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
-                      <li><a href="#"><b> + Ish e'loni qo'shish</b></a></li>
+                      <li><a href="#"><b> + Иш эълони қўшиш</b></a></li>
                       {% for object in kategoriya %}
                         <li>
                           <a href="#">obyekt</a>
@@ -73,21 +73,21 @@
                         {% endfor %}
                     </ul>
                   </li>
-                  <li><a><i class="fa fa-list"></i> Kategoriyalar <span class="fa fa-chevron-down"></span></a>
+                  <li><a><i class="fa fa-list"></i> Категориялар <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
                       <li><a href="#">Barcha kategoriyalar</a></li>
                       <li><a href="#">Kategoriya qo'shish</a></li>
                     </ul>
                   </li>
-                  <li><a><i class="fa fa-money"></i>Qabul qilinganlar  <span class="fa fa-chevron-down"></span></a>
+                  <li><a><i class="fa fa-money"></i>Кабул қилинганлар  <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
-                      <li><a href="#">Nomzod qo'shish</a></li>
-                      <li><a href="#">Nomzod o'chirish</a></li>
+                      <li><a href="#">Номзод қўшиш</a></li>
+                      <li><a href="#">Номзод ўчириш</a></li>
                     </ul>
                   </li>
-                  <li><a><i class="fa fa-envelope-o"></i> Xabarlar <span class="fa fa-chevron-down"></span></a>
+                  <li><a><i class="fa fa-envelope-o"></i> Хабарлар <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
-                      <li><a href="#">Barcha xabarlar</a></li>
+                      <li><a href="#">Барча хабарлар</a></li>
                     </ul>
                   </li>
                 </ul>

@@ -104,12 +104,13 @@ class EducationForm(forms.ModelForm):
         exclude = ['form']
 
 class ExperienceForm(forms.ModelForm):
-    startWorkDate = forms.DateField(label='Қабул қилинган сана',widget=forms.DateInput(format='%d/%m/%Y'),
+    startWorkDate = forms.DateField(label='Қабул қилинган сана',widget=forms.DateInput(format='%d/%m/%Y',attrs={'placeholder': 'Қабул қилинган сана'}),
                                     input_formats=['%d/%m/%Y',])
-    endWorkDate = forms.DateField(label='Ишдан бушатиш санаси',widget=forms.DateInput(format='%d/%m/%Y'),
+    endWorkDate = forms.DateField(label='Ишдан бушатиш санаси',widget=forms.DateInput(format='%d/%m/%Y',attrs={'placeholder': 'Ишдан бушатиш санаси'}),
                                   input_formats=['%d/%m/%Y',])
     name = forms.CharField(label='Ташкилот (корхона) номи', widget=forms.TextInput(attrs={'placeholder': 'Ташкилот (корхона) номи'}))
     lavozim = forms.CharField(label='Қайси лавозимда', widget=forms.TextInput(attrs={'placeholder': 'Қайси лавозимда ишлагансиз'}))
+    address = forms.CharField(label='Ташкилот манзили',widget=forms.TextInput(attrs={'placeholder': 'Ташкилот манзили'}))
 
     class Meta:
         model = Experience_uz
@@ -117,17 +118,20 @@ class ExperienceForm(forms.ModelForm):
 
 # firstName = forms.CharField(label='2. Исм', widget=forms.TextInput(attrs={'placeholder': 'Исмингизни киритинг'}))
 class RecommendationForm(forms.ModelForm):
-
+    fullName = forms.CharField(label='Ф.И.Ш. (тўлиқ)', widget=forms.TextInput(attrs={'placeholder': 'Ф.И.Ш. (тўлиқ)'}))
+    workPlace = forms.CharField(label='Иш жойи, лавозими', widget=forms.TextInput(attrs={'placeholder': 'Иш жойи, лавозими'}))
+    phoneAndEmail = forms.CharField(label='Телефон рақами, е-mail', widget=forms.TextInput(attrs={'placeholder': 'Телефон рақами, е-mail'}))
     class Meta:
         model = Recommendation_uz
         exclude = ['form']
 
 class OtherDocumentsForm(forms.ModelForm):
+    # file = forms.FileField(label='Хужжат')
+    # comment = forms.CharField(label='Хужжатга изох', widget=forms.TextInput(attrs={'placeholder': 'Хужжатга изох (кандай хужжат эканлиги ҳақида)'}))
+    # file = forms.FileField(label='Хужжат')
+    comment = forms.CharField(label='Хужжатга изох')
     class Meta:
         model = OtherDocuments
         exclude = ['form']
 
 
-EducationFormSet = modelformset_factory(
-    Education_uz,fields=("startingDate","endingDate","name","degree","speciality","diplomSeriya"),extra=1
-)

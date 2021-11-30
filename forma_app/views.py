@@ -79,8 +79,8 @@ class AddFormView(TemplateView):
                 otherdocsForma.save()
 
             return redirect(reverse_lazy('dashboard'))
-        # else:
-        #     return HttpResponse("baribir ishlamottiyu", content_type='text/plain')
+        else:
+            return HttpResponse(my_form.errors)
 
         return self.render_to_response({'my_form':my_form,'education_formset':education_formset,'experience_formset':experience_formset,'recommend_formset':recommend_formset,'otherdocs_formset':otherdocs_formset})
 
