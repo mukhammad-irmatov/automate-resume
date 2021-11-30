@@ -3,7 +3,7 @@ from django.http import HttpResponse
 from django.urls import reverse_lazy, reverse
 from django.views.generic import TemplateView,ListView,CreateView
 from .models import UserForm_uz,Education_uz,Experience_uz,Recommendation_uz,OtherDocuments,Job
-from .forms import MyForm,EducationForm,ExperienceForm,RecommendationForm,OtherDocumentsForm
+from .forms import MyForm,EducationForm,ExperienceForm,RecommendationForm,OtherDocumentsForm,JobForm
 from django.forms import modelformset_factory
 
 
@@ -17,11 +17,14 @@ class allApplicants(ListView):
     context_object_name = 'allApplicants'
 
 class AddJobView(CreateView):
-    model = Job
+    form_class = JobForm
     template_name = "add_job.html"
-    fields = ["jobName","education","workExperience","personalSkills","languages"]
-    success_url = reverse_lazy('dashboard')
+    success_url = reverse_lazy('all_jobs')
 
+class AllJobsView(ListView):
+    model = Job
+    template_name = 'allJobs.html'
+    context_object_name = 'all_jobs_context'
 
 class AddFormView(TemplateView):
     template_name = 'formuz.html'

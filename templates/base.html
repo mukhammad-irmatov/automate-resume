@@ -65,12 +65,9 @@
                   </li>
                   <li><a><i class="fa fa-cubes"></i> Иш эълонлари <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
+                        <li><a href="{% url 'all_jobs' %}"><b> Барча иш эълонлари </b></a></li>
                       <li><a href="{% url 'addjob' %}"><b> + Иш эълони қўшиш</b></a></li>
-                      {% for object in kategoriya %}
-                        <li>
-                          <a href="#">obyekt</a>
-                        </li>
-                        {% endfor %}
+
                     </ul>
                   </li>
                   <li><a><i class="fa fa-list"></i> Категориялар <span class="fa fa-chevron-down"></span></a>

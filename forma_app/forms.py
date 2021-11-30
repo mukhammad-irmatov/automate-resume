@@ -92,7 +92,7 @@ class MyForm(forms.ModelForm):
         fields = '__all__'
 
 class EducationForm(forms.ModelForm):
-    startingDate  = forms.DateField(label='Қабул қилинган сана',widget=forms.DateInput(format='%d/%m/%Y',attrs={'placeholder': 'Қабул қилинган сана'}),
+    startingDate  = forms.DateField(label='Қабул қилинган сана',widget=forms.DateInput(format='%d/%m/%Y',attrs={'placeholder': '20/01/1995'}),
                                 input_formats=['%d/%m/%Y',])
     endingDate = forms.DateField(label='Тугаш санаси',widget=forms.DateInput(format='%d/%m/%Y',attrs={'placeholder': 'Тугаш санаси'}),
                                 input_formats=['%d/%m/%Y',])
@@ -136,7 +136,12 @@ class OtherDocumentsForm(forms.ModelForm):
         exclude = ['form']
 
 class JobForm(forms.ModelForm):
-    jobName = forms.CharField(label='Ваканция номи')
+    jobName = forms.CharField(label='Ваканция номи', widget=forms.TextInput(attrs={'placeholder': 'Ваканция номи'}))
+    education = forms.CharField(label='Маълумоти', widget=forms.TextInput(attrs={'placeholder': 'Мисол учун: orta maxsus, oliy'}))
+    workExperience = forms.CharField(label='Иш тажрибаси', widget=forms.TextInput(attrs={'placeholder': 'Мисол учун: 3 yillik tajriba'}))
+    personalSkills = forms.CharField(label='Шахсий сифатлари', widget=forms.TextInput(attrs={'placeholder': 'Мисол учун: chet tillarida faol'}))
+    languages = forms.CharField(label='Тиллар', widget=forms.TextInput(attrs={'placeholder': 'Мисол учун: Xitoy tili - Сўзлашув, Рус тили - erkin, Узбек тили - erkin'}))
+    Place = forms.CharField(label='Иш жойи', widget=forms.TextInput(attrs={'placeholder': 'Мисол учун: Тошкент вилояти'}))
     class Meta:
         model = Job
         fields = "__all__"

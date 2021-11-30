@@ -4,11 +4,13 @@ from django.db import models
 
 
 class Job(models.Model):
-    jobName = models.CharField(max_length=200)
-    education = models.CharField(max_length=100)
-    workExperience = models.CharField(max_length=100)
-    personalSkills = models.CharField(max_length=150)
-    languages = models.CharField(max_length=100)
+    jobName = models.CharField(max_length=200,blank=True,null=True)
+    education = models.CharField(max_length=100,blank=True,null=True)
+    workExperience = models.CharField(max_length=100,blank=True,null=True)
+    personalSkills = models.CharField(max_length=150,blank=True,null=True)
+    languages = models.CharField(max_length=100,blank=True,null=True)
+    Place = models.CharField(max_length=200,blank=True,null=True)
+
     def __str__(self):
         return self.jobName
 
@@ -88,6 +90,9 @@ class Experience_uz(models.Model):
     name = models.CharField(max_length=100,blank=True,null=True)
     lavozim = models.CharField(max_length=100,blank=True,null=True)
     address = models.CharField(max_length=100,blank=True,null=True)
+
+    def __str__(self):
+        return self.form.firstName+" ish joyi: "+self.name
 
 class Recommendation_uz(models.Model):
     form = models.ForeignKey(
