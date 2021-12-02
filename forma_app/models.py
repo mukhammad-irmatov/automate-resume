@@ -13,6 +13,9 @@ class Job(models.Model):
 
     def __str__(self):
         return self.jobName
+class Interview(models.Model):
+    interviewDay = models.DateField()
+    InterviewTime = models.TimeField()
 
 class UserForm_uz(models.Model):
     rasm = models.ImageField(upload_to='media/rasmlar',null=True,blank=True)
@@ -64,7 +67,7 @@ class UserForm_uz(models.Model):
     def __str__(self):
         return self.firstName+ " " +self.lastName
     class Meta:
-        ordering = ['-time']
+        ordering = ['time']
 
 class Education_uz(models.Model):
     form = models.ForeignKey(

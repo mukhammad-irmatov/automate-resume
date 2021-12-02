@@ -1,5 +1,6 @@
 from django.urls import path
-from .views import AddFormView,adminPanelView,allApplicants,AddJobView,AllJobsView,smsView
+from .views import AddFormView,adminPanelView,allApplicants,AddJobView,AllJobsView,smsView,InterviewFormView
+from django.contrib.auth.mixins import LoginRequiredMixin
 
 urlpatterns = [
     path('',AddFormView.as_view(),name="addForm"),
@@ -9,5 +10,7 @@ urlpatterns = [
     path('manager/jobs/addJob',AddJobView.as_view(),name="addjob"),
     path('manager/jobs',AllJobsView.as_view(),name="all_jobs"),
     path('sms/',smsView,name="broadcastsms"),
+    path('manager/interview',InterviewFormView.as_view(),name='interview')
+
 
 ]

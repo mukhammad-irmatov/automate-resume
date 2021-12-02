@@ -1,12 +1,15 @@
 from django.shortcuts import redirect, render
 from django.http import HttpResponse
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.urls import reverse_lazy, reverse
 from django.views.generic import TemplateView,ListView,CreateView
 from .models import UserForm_uz,Education_uz,Experience_uz,Recommendation_uz,OtherDocuments,Job
-from .forms import MyForm,EducationForm,ExperienceForm,RecommendationForm,OtherDocumentsForm,JobForm
+from .forms import MyForm,EducationForm,ExperienceForm,RecommendationForm,OtherDocumentsForm,JobForm,InterviewForm
 from django.forms import modelformset_factory
 from django.conf import settings
 from twilio.rest import Client
+
+
 
 def smsView(request):
     client = Client(settings.TWILIO_ACCOUNT_SID, settings.TWILIO_AUTH_TOKEN)
@@ -17,30 +20,55 @@ def smsView(request):
 
     return HttpResponse("Rahmat SMS muvaffaqiyatli yuborildi")
 
-class adminPanelView(ListView):
+
+def interview(request):
+    if request.method == "POST":
+        interview_form = InterviewForm(request.POST)
+        raqamlar = []
+        raqamlar = UserForm_uz.objects.values_list('phoneNumber',flat=True)
+        account_sid = 'ACfe40a932a05078e5b02a581d9987a351'
+        auth_token = '3fc88842f8bfc633f435a10f770441db'
+        for x in raqamlar:
+            raqamlar.append(x)
+        print(raqamlar)
+        if interview_form.is_valid():
+            client = Client(account_sid, auth_token)
+
+            client.messages.create(
+                from_='+12347040890',
+                to='+998993451598',
+                body=f"Assalomu aleykum, sizga intervyu belgilangan. Intervyu vaqti Chorshanba kuni soat 11:30da",
+            )
+        return redirect('all_applicants')
+    else:
+        interview_form = InterviewForm()
+    return render(request,'interview.html',{'interview_form':interview_form})
+
+class adminPanelView(LoginRequiredMixin,ListView):
     model = UserForm_uz
     template_name = 'dashboard.html'
+    login_url = 'login'
 
-class allApplicants(ListView):
+class allApplicants(LoginRequiredMixin,ListView):
     model = UserForm_uz
     template_name = 'all_applicants.html'
     context_object_name = 'allApplicants'
     ordering = ['time']
+    login_url = 'login'
 
-class AddJobView(CreateView):
+class AddJobView(LoginRequiredMixin,CreateView):
     form_class = JobForm
     template_name = "add_job.html"
     success_url = reverse_lazy('all_jobs')
+    login_url = 'login'
 
-# class InterviewCreateView(CreateView):
-#     form_class = JobForm
-#     template_name = "add_job.html"
-#     success_url = reverse_lazy('all_jobs')
 
-class AllJobsView(ListView):
+
+class AllJobsView(LoginRequiredMixin,ListView):
     model = Job
     template_name = 'allJobs.html'
     context_object_name = 'all_jobs_context'
+    login_url = 'login'
 
 class AddFormView(TemplateView):
     template_name = 'formuz.html'
@@ -113,3 +141,27 @@ class AddFormView(TemplateView):
 
 
 
+class InterviewFormView(TemplateView):
+    template_name = 'interview.html'
+
+    # Define method to handle GET request
+    def get(self, *args, **kwargs):
+        # Create an instance of the formset
+        interview_form = InterviewForm()
+        return self.render_to_response({'interview_form':interview_form})
+    def post(self, *args, **kwargs):
+        interview_form = InterviewForm(self.request.POST)
+        print(interview_form)
+        if interview_form.is_valid():
+            interview_form.save()
+
+            return redirect(reverse_lazy('addForm'))
+        # else:
+        #     return HttpResponse(interview_form.errors)
+        return self.render_to_response({'interview_form':interview_form})
+
+
+# class InterviewCreateView(CreateView):
+#     form_class = JobForm
+#     template_name = "add_job.html"
+#     success_url = reverse_lazy('all_jobs')

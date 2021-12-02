@@ -1,5 +1,5 @@
 from django import forms
-from .models import UserForm_uz,Education_uz,Experience_uz,Recommendation_uz,OtherDocuments,Job
+from .models import UserForm_uz,Education_uz,Experience_uz,Recommendation_uz,OtherDocuments,Job,Interview
 from django.forms import modelformset_factory
 
 marriage_choices = [('Уйланган', 'Уйланган'),
@@ -156,8 +156,9 @@ class JobForm(forms.ModelForm):
         fields = "__all__"
 # firstName = forms.CharField(label='2. Исм', widget=forms.TextInput(attrs={'placeholder': 'Исмингизни киритинг'}))
 
-# class InterviewForm(forms.Form):
-#     days = forms.MultipleChoiceField(label="Интервю кунларини белгиланг",choices=forms.CheckboxSelectMultiple())
-#     time = forms.TimeInput()
-#
-    # personalSkills = forms.ChoiceField(label='17. Шахсий фазилатларингиз',choices=personalSkills_choices,widget=forms.CheckboxSelectMultiple())
+class InterviewForm(forms.ModelForm):
+    interviewDay = forms.DateField(label="Интервю кунларини белгиланг")
+    InterviewTime = forms.TimeField(label='Intervyu vaqtini yozing')
+    class Meta:
+        model =Interview
+        fields = "__all__"
