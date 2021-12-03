@@ -14,8 +14,8 @@ class Job(models.Model):
     def __str__(self):
         return self.jobName
 class Interview(models.Model):
-    interviewDay = models.DateField()
-    InterviewTime = models.TimeField()
+    interviewDay = models.CharField(max_length=50)
+    InterviewTime = models.PositiveSmallIntegerField()
 
 class UserForm_uz(models.Model):
     rasm = models.ImageField(upload_to='media/rasmlar',null=True,blank=True)

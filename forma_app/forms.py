@@ -157,8 +157,8 @@ class JobForm(forms.ModelForm):
 # firstName = forms.CharField(label='2. Исм', widget=forms.TextInput(attrs={'placeholder': 'Исмингизни киритинг'}))
 
 class InterviewForm(forms.ModelForm):
-    interviewDay = forms.DateField(label="Интервю кунларини белгиланг")
-    InterviewTime = forms.TimeField(label='Intervyu vaqtini yozing')
+    interviewDay = forms.CharField(label="Интервю кунини белгиланг")
+    InterviewTime = forms.IntegerField(label='Intervyu boshlanish vaqtini yozing',widget=forms.NumberInput)
     class Meta:
         model =Interview
         fields = "__all__"

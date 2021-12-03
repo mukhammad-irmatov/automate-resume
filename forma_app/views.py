@@ -21,28 +21,6 @@ def smsView(request):
     return HttpResponse("Rahmat SMS muvaffaqiyatli yuborildi")
 
 
-def interview(request):
-    if request.method == "POST":
-        interview_form = InterviewForm(request.POST)
-        raqamlar = []
-        raqamlar = UserForm_uz.objects.values_list('phoneNumber',flat=True)
-        account_sid = 'ACfe40a932a05078e5b02a581d9987a351'
-        auth_token = '3fc88842f8bfc633f435a10f770441db'
-        for x in raqamlar:
-            raqamlar.append(x)
-        print(raqamlar)
-        if interview_form.is_valid():
-            client = Client(account_sid, auth_token)
-
-            client.messages.create(
-                from_='+12347040890',
-                to='+998993451598',
-                body=f"Assalomu aleykum, sizga intervyu belgilangan. Intervyu vaqti Chorshanba kuni soat 11:30da",
-            )
-        return redirect('all_applicants')
-    else:
-        interview_form = InterviewForm()
-    return render(request,'interview.html',{'interview_form':interview_form})
 
 class adminPanelView(LoginRequiredMixin,ListView):
     model = UserForm_uz
@@ -141,8 +119,9 @@ class AddFormView(TemplateView):
 
 
 
-class InterviewFormView(TemplateView):
+class InterviewFormView(LoginRequiredMixin,TemplateView):
     template_name = 'interview.html'
+    login_url = 'login'
 
     # Define method to handle GET request
     def get(self, *args, **kwargs):
@@ -150,8 +129,36 @@ class InterviewFormView(TemplateView):
         interview_form = InterviewForm()
         return self.render_to_response({'interview_form':interview_form})
     def post(self, *args, **kwargs):
+        raqamlar = []
+
+        raqamlar = UserForm_uz.objects.values_list('phoneNumber', flat=True).filter(phoneNumber__startswith="+")
         interview_form = InterviewForm(self.request.POST)
-        print(interview_form)
+        interviewDay = interview_form['interviewDay'].value()
+        interviewTime = interview_form['InterviewTime'].value()
+        print(raqamlar)
+        print(interviewDay)
+        print(interviewTime)
+        minut = 0
+        soat = interviewTime
+        for number in raqamlar:
+            if minut == 60:
+                minut = 0
+                soat = soat + 1
+
+            account_sid = settings.TWILIO_ACCOUNT_SID
+            auth_token = settings.TWILIO_AUTH_TOKEN
+            twilioNumber = settings.TWILIO_NUMBER
+            client = Client(account_sid, auth_token)
+            message = client.messages.create(
+                from_=twilioNumber,
+                to=number,
+                body=f"Assalomu aleykum, sizga intervyu belgilangan. Intervyu vaqti {interviewDay} kuni soat {soat}:{minut}da. "
+                     f"Kech qolmasdan,o'z vaqtida kelishingizni so'raymiz!",
+            )
+            print(f'{soat}:{minut}')
+            minut = minut + 10
+
+
         if interview_form.is_valid():
             interview_form.save()
 
@@ -161,7 +168,37 @@ class InterviewFormView(TemplateView):
         return self.render_to_response({'interview_form':interview_form})
 
 
-# class InterviewCreateView(CreateView):
-#     form_class = JobForm
-#     template_name = "add_job.html"
-#     success_url = reverse_lazy('all_jobs')
+# def interview(request):
+#     if request.method == "POST":
+#         interview_form = InterviewForm(request.POST)
+#         raqamlar = []
+#         # raqamlar = UserForm_uz.objects.values_list('phoneNumber',flat=True).filter(phoneNumber__startswith="+")
+#         raqamlar = UserForm_uz.objects.all.filter(phoneNumber__startswith="+").values()
+#         account_sid = settings.TWILIO_ACCOUNT_SID
+#         auth_token = settings.TWILIO_AUTH_TOKEN
+#         twilioNumber = settings.TWILIO_NUMBER
+#         for x in raqamlar:
+#             raqamlar.append(x)
+#         print(raqamlar)
+#         if interview_form.is_valid():
+#             client = Client(account_sid, auth_token)
+#
+#             client.messages.create(
+#                 from_=twilioNumber,
+#                 to=raqamlar,
+#                 body=f"Assalomu aleykum, sizga intervyu belgilangan. Intervyu vaqti Chorshanba kuni soat 11:30da",
+#             )
+#         return redirect('all_applicants')
+#     else:
+#         interview_form = InterviewForm()
+#     return render(request,'interview.html',{'interview_form':interview_form})
+
+
+def printTime(request):
+    if request.POST:
+        data = request.POST.dict()
+        interviewDay = request.POST.get('interviewDay')
+        interviewTime = request.POST.get('interviewTime')
+        print(interviewDay)
+        print(interviewTime)
+        return render(request , 'interview.html')
