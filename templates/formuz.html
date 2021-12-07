@@ -190,11 +190,11 @@ $(document).ready(function() {
 
 
         <div class="row ml-4">
-            <div class="col-sm-4">
+            <div class="col-sm-4 was-validated">
     {{ my_form.computer_literacy|as_crispy_field }}
         </div>
         <div class="col-sm-8">
-            <ul class="mt-4">
+            <ul class="mt-5">
                 <li class="list-unstyled ">Шахсий компютерларда ишлаш кўникмасига эга эмас</li>
                 <li class="list-unstyled pt-3">Windows операцион тизимининг асосий вазифаларини ўзлаштирган (улардан фойдаланиш, қайта номлаш, кўчириш, матн билан ишлаш, уни яратиш,
                     ҳужжатларни сақлаш ва ҳ.к.</li>
@@ -404,7 +404,7 @@ $(document).ready(function() {
            <div class="col-sm-12">
             <label for="">Бошқа документлар</label>
                 <hr class="border border-secondary">
-        <span class="text-danger">Юбориш учун ишга оид яна бошқа ҳужжатлар бўлса, юборишингиз мумкин</span>
+        <span class="text-danger">Ишга оид яна бошқа ҳужжатлар бўлса, юборишингиз мумкин</span>
 
                {{ otherdocs_formset.management_form }}
                {% for form in  otherdocs_formset %}
@@ -449,20 +449,6 @@ $(document).ready(function() {
            <button type="submit" class="btn btn-danger">Резюмени жўнатиш</button>
        </p>
 
-
-
-{#    <section class="w-100">#}
-{#        <div class="container text-center">#}
-{#            <div class="btn-group btn-group-toggle" data-toggle="buttons">#}
-{#                <label class="btn btn-info">#}
-{#                  <button type="submit"  class="btn btn-info">#}
-{#                        Юбориш#}
-{#                  </button>#}
-{#                </label>#}
-{##}
-{#              </div>#}
-{#        </div>#}
-{#    </section>#}
 </form>
 
 
