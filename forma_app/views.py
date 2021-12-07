@@ -11,17 +11,6 @@ from twilio.rest import Client
 
 
 
-def smsView(request):
-    client = Client(settings.TWILIO_ACCOUNT_SID, settings.TWILIO_AUTH_TOKEN)
-
-    message = client.messages.create(to='+998993451598', from_='+12347040890', body='Assalomu aleykum Hurmatli ish qidiruvchi')
-
-    print(message.sid)
-
-    return HttpResponse("Rahmat SMS muvaffaqiyatli yuborildi")
-
-
-
 class adminPanelView(LoginRequiredMixin,ListView):
     model = UserForm_uz
     template_name = 'dashboard.html'
@@ -110,7 +99,7 @@ class AddFormView(TemplateView):
                 otherdocsForma.form = form
                 otherdocsForma.save()
 
-            return redirect(reverse_lazy('dashboard'))
+            return HttpResponse("<h2>Рўйхатдан ўтганингиз учун рахмат. Сиз билан тез орада аълоқага чиқамиз</h2>")
         else:
             return HttpResponse(my_form.errors)
 
@@ -130,14 +119,15 @@ class InterviewFormView(LoginRequiredMixin,TemplateView):
         return self.render_to_response({'interview_form':interview_form})
     def post(self, *args, **kwargs):
         raqamlar = []
-
-        raqamlar = UserForm_uz.objects.values_list('phoneNumber', flat=True).filter(phoneNumber__startswith="+")
         interview_form = InterviewForm(self.request.POST)
         interviewDay = interview_form['interviewDay'].value()
         interviewTime = interview_form['InterviewTime'].value()
+        interviewJob = interview_form['interviewJob'].value()
+        raqamlar = UserForm_uz.objects.values_list('phoneNumber', flat=True).filter(phoneNumber__startswith="+",jobName = interviewJob)
         print(raqamlar)
         print(interviewDay)
         print(interviewTime)
+        print(interviewJob)
         minut = 0
         soat = interviewTime
         for number in raqamlar:
@@ -168,37 +158,3 @@ class InterviewFormView(LoginRequiredMixin,TemplateView):
         return self.render_to_response({'interview_form':interview_form})
 
 
-# def interview(request):
-#     if request.method == "POST":
-#         interview_form = InterviewForm(request.POST)
-#         raqamlar = []
-#         # raqamlar = UserForm_uz.objects.values_list('phoneNumber',flat=True).filter(phoneNumber__startswith="+")
-#         raqamlar = UserForm_uz.objects.all.filter(phoneNumber__startswith="+").values()
-#         account_sid = settings.TWILIO_ACCOUNT_SID
-#         auth_token = settings.TWILIO_AUTH_TOKEN
-#         twilioNumber = settings.TWILIO_NUMBER
-#         for x in raqamlar:
-#             raqamlar.append(x)
-#         print(raqamlar)
-#         if interview_form.is_valid():
-#             client = Client(account_sid, auth_token)
-#
-#             client.messages.create(
-#                 from_=twilioNumber,
-#                 to=raqamlar,
-#                 body=f"Assalomu aleykum, sizga intervyu belgilangan. Intervyu vaqti Chorshanba kuni soat 11:30da",
-#             )
-#         return redirect('all_applicants')
-#     else:
-#         interview_form = InterviewForm()
-#     return render(request,'interview.html',{'interview_form':interview_form})
-
-
-def printTime(request):
-    if request.POST:
-        data = request.POST.dict()
-        interviewDay = request.POST.get('interviewDay')
-        interviewTime = request.POST.get('interviewTime')
-        print(interviewDay)
-        print(interviewTime)
-        return render(request , 'interview.html')

@@ -28,8 +28,6 @@
             <h2>Интервю кунини белгиланг</h2>
             <form method="post">{% csrf_token %}
             {{ interview_form|crispy }}
-{#                <input type="text" placeholder="Интервю кунини белгиланг" id="interviewDay" name="interviewDay">#}
-{#                <input type="number" placeholder="Интервю вақтини киритинг" id="interviewTime" name="interviewTime">#}
     <button type="submit" class="btn btn-danger">Jo'natish</button>
 </form>
         </div>

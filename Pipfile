@@ -10,6 +10,7 @@ django-shapeshifter = "*"
 django-multi-form-view = "*"
 six = "*"
 twilio = "*"
+django-google-translate = "*"
 
 [dev-packages]
 

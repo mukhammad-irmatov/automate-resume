@@ -28,15 +28,12 @@ DEBUG = True
 ALLOWED_HOSTS = []
 
 
-# Application definition
-TWILIO_ACCOUNT_SID = "ACfe40a932a05078e5b02a581d9987a351"
-TWILIO_AUTH_TOKEN = "2131c2ac7c53decaba8b8df26c3bb3be"
-TWILIO_NUMBER = "+12347040890"
-SMS_BROADCAST_TO_NUMBERS = [
-    "+998993451598",
-    "+77074099109",
 
-]
+# Application definition
+TWILIO_ACCOUNT_SID = 'ACfe40a932a05078e5b02a581d9987a351'
+TWILIO_AUTH_TOKEN = "ebe6596292c4405fe3a33b81926125f4"
+TWILIO_NUMBER = "+12347040890"
+
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -46,7 +43,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'forma_app.apps.FormaAppConfig',
-    'crispy_forms',
+    'crispy_forms'
 ]
 
 

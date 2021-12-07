@@ -1,5 +1,6 @@
 {% load static %}
 {% load crispy_forms_tags %}
+
 <html>
 <head>
  <meta charset="UTF-8">
@@ -20,6 +21,14 @@
         integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous">
     </script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="http://code.jquery.com/ui/1.11.0/themes/smoothness/jquery-ui.css">
+<script src="http://code.jquery.com/jquery-1.9.1.js"></script>
+<script src="http://code.jquery.com/ui/1.11.0/jquery-ui.js"></script>
+<script>
+$(document).ready(function() {
+    $('.birthData').datepicker();
+});
+</script>
 
     <!-- Fontawesome_Pro -->
     <link href="https://kit-pro.fontawesome.com/releases/v5.15.1/css/pro.min.css" rel="stylesheet">
@@ -81,7 +90,7 @@
 
         </div>
 
-        <div class="col-sm-4 was-validated was-validated">
+        <div class="col-sm-4 was-validated">
             {{ my_form.marriage_status|as_crispy_field }}
         </div>
 

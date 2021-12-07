@@ -1,6 +1,5 @@
 from django import forms
 from .models import UserForm_uz,Education_uz,Experience_uz,Recommendation_uz,OtherDocuments,Job,Interview
-from django.forms import modelformset_factory
 
 marriage_choices = [('Уйланган', 'Уйланган'),
                     ('Бўйдок', 'Бўйдок')]
@@ -58,6 +57,7 @@ class MyForm(forms.ModelForm):
     middleName = forms.CharField(label='3. Шарифингиз', widget=forms.TextInput(attrs={'placeholder': 'Шарифингизни киритинг'}))
     birthData = forms.DateField(label='Тугилган кунингиз',widget=forms.DateInput(format='%d/%m/%Y',attrs={'placeholder': 'Тугилган кунингизни киритинг'}),
                                 input_formats=('%d/%m/%Y',))
+
     nation = forms.CharField(label='5. Миллати', widget=forms.TextInput(attrs={'placeholder': 'Миллати'}))
     birthPlace = forms.CharField(label='6. Туғилган жойи', widget=forms.TextInput(attrs={'placeholder': 'Туғилган жойи'}))
     marriage_status = forms.ChoiceField(label='7. Оилавий ҳолати',choices=marriage_choices, widget=forms.RadioSelect())
@@ -157,6 +157,7 @@ class JobForm(forms.ModelForm):
 # firstName = forms.CharField(label='2. Исм', widget=forms.TextInput(attrs={'placeholder': 'Исмингизни киритинг'}))
 
 class InterviewForm(forms.ModelForm):
+    interviewJob = forms.ModelChoiceField(label="Ваканцияни танланг",queryset=Job.objects.all())
     interviewDay = forms.CharField(label="Интервю кунини белгиланг")
     InterviewTime = forms.IntegerField(label='Intervyu boshlanish vaqtini yozing',widget=forms.NumberInput)
     class Meta:

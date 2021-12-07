@@ -13,7 +13,13 @@ class Job(models.Model):
 
     def __str__(self):
         return self.jobName
+
 class Interview(models.Model):
+    interviewJob = models.ForeignKey(
+        Job,
+        on_delete=models.CASCADE,
+        blank=True,null=True
+    )
     interviewDay = models.CharField(max_length=50)
     InterviewTime = models.PositiveSmallIntegerField()
 
