@@ -10,6 +10,7 @@ class Job(models.Model):
     personalSkills = models.CharField(max_length=150,blank=True,null=True,default="Белгиланмаган")
     languages = models.CharField(max_length=100,blank=True,null=True,default="Белгиланмаган")
     Place = models.CharField(max_length=200,blank=True,null=True,default="Белгиланмаган")
+    jobText = models.TextField()
 
     def __str__(self):
         return self.jobName

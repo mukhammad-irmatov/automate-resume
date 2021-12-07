@@ -90,7 +90,7 @@ class MyForm(forms.ModelForm):
     agreement = forms.ChoiceField(label='28. Шахсий маълумотларингизни қайта ишлашимизга (ўрганишимизга) розилик берасизми',choices=agreement_choices, widget=forms.RadioSelect())
     passport_file = forms.FileField(label='Шахсни тасдиқловчи ҳужжат (Номзоднинг паспорти)')
     diplom_file = forms.FileField(label='Бирор таълим муассасасини тугатганлиги ҳақидаги диплом/сертификатлар битта архив файлда ')
-    trudovoyKnishka = forms.FileField(label='МеҲнат дафтарчаси')
+    trudovoyKnishka = forms.FileField(label='Меҳнат дафтарчаси')
     fullName = forms.CharField(label='ФИО', widget=forms.TextInput(attrs={'placeholder': 'Тўлиқ фамилия исм-шарифингизни киритинг'}))
 
     class Meta:
@@ -136,9 +136,7 @@ class RecommendationForm(forms.ModelForm):
         exclude = ['form']
 
 class OtherDocumentsForm(forms.ModelForm):
-    # file = forms.FileField(label='Хужжат')
-    # comment = forms.CharField(label='Хужжатга изох', widget=forms.TextInput(attrs={'placeholder': 'Хужжатга изох (кандай хужжат эканлиги ҳақида)'}))
-    # file = forms.FileField(label='Хужжат')
+
     comment = forms.CharField(label='Хужжатга изох')
     class Meta:
         model = OtherDocuments
@@ -151,6 +149,7 @@ class JobForm(forms.ModelForm):
     personalSkills = forms.CharField(label='Шахсий сифатлари',required=False, widget=forms.TextInput(attrs={'placeholder': 'мисол учун: chet tillarida faol'}))
     languages = forms.CharField(label='Тиллар', required=False,widget=forms.TextInput(attrs={'placeholder': 'мисол учун: Xitoy tili - Сўзлашув, Рус тили - erkin, Узбек тили - erkin'}))
     Place = forms.CharField(label='Иш жойи', required=False,widget=forms.TextInput(attrs={'placeholder': 'мисол учун: Тошкент вилояти'}))
+    jobText = forms.CharField(label="Иш ҳақида батафсилроқ маълумот беринг",widget=forms.Textarea)
     class Meta:
         model = Job
         fields = "__all__"
