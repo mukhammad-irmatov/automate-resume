@@ -43,6 +43,11 @@ class AllJobsView(LoginRequiredMixin,ListView):
     context_object_name = 'all_jobs_context'
     login_url = 'login'
 
+class HomePageView(ListView):
+    model = Job
+    template_name = 'home.html'
+    context_object_name = 'all_jobs'
+
 class AddFormView(TemplateView):
     template_name = 'formuz.html'
 

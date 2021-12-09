@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="{% static 'css/main.css' %}" />
+
+    <title>Uz Kombinat</title>
+  </head>
+  <body>
+    <!-- -----------header---------------------- -->
+    <header class="header">
+      <nav class="nav">
+        <div class="nav_container">
+          <div class="nav__logo">
+            <img src="{% static 'images/img/logo.png' %}">
+          </div>
+          <div class="nav__menu">
+            <ul class="nav__list">
+              <li class="nav__item">
+                <a class="nav__link" href="index.html"> Вакансиялар </a>
+              </li>
+              <li class="nav__item">
+                <a class="nav__link" href="company.html"> Компания ҳақида </a>
+              </li>
+            </ul>
+            <div class="nav__contact">
+              <div class="nav__contact-icon">
+                <img class="contact__icon" src="{% static 'images/icon/phone.png' %}"/>
+              </div>
+              <div class="nav__contact-data">
+                <p class="nav__contact-text">
+                  Информацион-техник қўллаб-қувватлаш
+                </p>
+                <a class="nav__contact-link" href="tel:+998(90)123-45-67">
+                  +998(90)123-45-67
+                </a>
+              </div>
+            </div>
+          </div>
+
+          <div class="dropdown">
+            <button onclick="myFunction()" class="dropbtn">
+              Уз
+              <img class="drop__icon" src="{% static 'images/icon/lang.png' %}" alt="" />
+            </button>
+            <div id="myDropdown" class="dropdown-content">
+              <a href="#">Уз</a>
+              <a href="#">Рус</a>
+              <a href="#">Англиский</a>
+            </div>
+          </div>
+
+          <div class="nav__media__lang">
+            <button class="nav__btn-media">
+              <img class="nav__contact-icon" src="{% static 'images/icon/phone.png' %}" alt=""/>
+            </button>
+            <button class="nav__btn-media nav__lang">
+              <a class="nav__btn-link" href="/">Уз</a>
+            </button>
+            <button class="nav__btn-media nav__lang">
+              <a class="nav__btn-link" href="/"> Рус </a>
+            </button>
+          </div>
+
+          <div class="nav__btns">
+            <button class="nav__btn nav__open">
+              <img class="nav__btn-img" src="{% static 'images/icon/burger.png' %}" alt="" />
+            </button>
+            <button class="nav__btn nav__close">
+              <img class="nav__btn-img" src="{% static 'images/icon/close.png' %}" alt="" />
+            </button>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <!-- input -->
+
+    <section class="section__input">
+      <div class="container">
+        <div class="input__wrapper">
+          <div class="input__hero">
+            <div class="input__title">
+              <h2 class="input__text">Узметкомбинат</h2>
+              <p class="input__disc">сайтига хуш келибсиз!</p>
+            </div>
+
+            <div class="input__search">
+              <input class="input__main" type="text" placeholder="қидирув" />
+              <button class="search__btn">
+                <img class="search__btn__icon" src="{% static 'images/icon/poisk.png' %}" alt="" />
+                <p class="search__btn__disc">қидирув</p>
+              </button>
+              <button class="search__btn-media">
+                <img class="search__btn__img" src="{% static 'images/icon/poisk.png' %}" alt="" />
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- accordion -->
+    <div class="accordion" id="accordion">
+      <div class="container">
+        <div class="accordion__title">
+          <img class="accordion__img" src="{% static 'images/img/vacansy__img.png' %}" />
+          <div class="accordion__icon__title">
+            <div class="accordion__disc">
+              <img class="accordion__icon" src="{% static 'images/icon/calendar.png' %}" alt=""/>
+              <p class="accordion__disc__text">21.04.2020</p>
+              <img class="accordion__icon" src="{% static 'images/icon/glass.png' %}"  alt="" />
+              <p class="accordion__disc__text">562</p>
+            </div>
+
+            <div class="accordion__disc__title">
+              <h2 class="accordion__first__title">
+                Юрисконсулт ("Ўзметкомбинат" АК) лавозимига
+              </h2>
+              <h1 class="accordion__second__title">
+                Номзоднинг ишига қўйиладиган асосий талаблар:
+              </h1>
+            </div>
+            <div class="accordion__list__text">
+              <div class="accordion__list__item">
+                <div class="item__block">
+                  <ul>
+                    <li class="accordion__item__text">Маълумоти:</li>
+                    <li class="accordion__item__text">Иш тажрибаси:</li>
+                    <li class="accordion__item__text">Тиллар:</li>
+                  </ul>
+                </div>
+                <div class="item__block">
+                  <ul>
+                    <li class="accordion__item__span">Олий юридик маълумот:</li>
+                    <li class="accordion__item__span">3 йиллик тажриба:</li>
+                    <li class="accordion__item__span">
+                      Инглиз тили - Сўзлашув, Рус тили - эркин...
+                    </li>
+                  </ul>
+                </div>
+              </div>
+              <div class="panel">
+                <p class="accordion__end__disc">
+                  Буйруқлар, норматив ҳужжатлар ва бошқа ҳуқуқий ҳужжатлар
+                  лойиҳаларининг амалдаги қонунчилик талабларига мувофиқлиги
+                  бўйича ҳуқуқий экспертиза ўтказиш. Таркибий тузилмалар
+                  раҳбарлари ва уларнинг ўринбосарлари бундан мустасно, завод
+                  ишчиларига тегишли ходимларга буюртмалар лойиҳалари. Шу билан
+                  бирга, заводнинг бошқа таркибий бўлинмаларидан (ходимларидан)
+                  кейин лойиҳаларни тасдиқлаш. Умумий ва махсус юридик судларида
+                  заводнинг ишончномаси бўйича ишларни рўйхатга олиш ва юритиш,
+                  уларни ҳисобга олиш ва сақлашни амалга ошириш. Комбинат
+                  ходимларига ташкилий-ҳуқуқий ва бошқа ҳуқуқий масалалар бўйича
+                  маслаҳат бериш, хулосалар тайёрлаш, ҳужжатлар ва
+                  мулкий-ҳуқуқий характердаги ҳужжатларни тайёрлашда ёрдам
+                  бериш..
+                </p>
+              </div>
+              <div class="accordion__end__btn">
+                <button class="send__btn">
+                  <img class="send__btn__icon" src="{% static 'images/icon/document.png' %}"  alt="" />
+                  Резюме тулдириш
+                </button>
+                <button class="down__btn" id="down-btn">...Batafsil</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+
+
+    <div class="accordion" id="accordion">
+      <div class="container">
+        <div class="accordion__title">
+          <img class="accordion__img" src="{% static 'images/img/vacansy__img.png' %}" />
+          <div class="accordion__icon__title">
+            <div class="accordion__disc">
+              <img class="accordion__icon" src="{% static 'images/icon/calendar.png' %}" alt=""/>
+              <p class="accordion__disc__text">21.04.2020</p>
+              <img class="accordion__icon" src="{% static 'images/icon/glass.png' %}"  alt="" />
+              <p class="accordion__disc__text">562</p>
+            </div>
+
+            <div class="accordion__disc__title">
+              <h2 class="accordion__first__title">
+                Юрисконсулт ("Ўзметкомбинат" АК) лавозимига
+              </h2>
+              <h1 class="accordion__second__title">
+                Номзоднинг ишига қўйиладиган асосий талаблар:
+              </h1>
+            </div>
+            <div class="accordion__list__text">
+              <div class="accordion__list__item">
+                <div class="item__block">
+                  <ul>
+                    <li class="accordion__item__text">Маълумоти:</li>
+                    <li class="accordion__item__text">Иш тажрибаси:</li>
+                    <li class="accordion__item__text">Тиллар:</li>
+                  </ul>
+                </div>
+                <div class="item__block">
+                  <ul>
+                    <li class="accordion__item__span">Олий юридик маълумот:</li>
+                    <li class="accordion__item__span">3 йиллик тажриба:</li>
+                    <li class="accordion__item__span">
+                      Инглиз тили - Сўзлашув, Рус тили - эркин...
+                    </li>
+                  </ul>
+                </div>
+              </div>
+              <div class="panel">
+                <p class="accordion__end__disc">
+                  Буйруқлар, норматив ҳужжатлар ва бошқа ҳуқуқий ҳужжатлар
+                  лойиҳаларининг амалдаги қонунчилик талабларига мувофиқлиги
+                  бўйича ҳуқуқий экспертиза ўтказиш. Таркибий тузилмалар
+                  раҳбарлари ва уларнинг ўринбосарлари бундан мустасно, завод
+                  ишчиларига тегишли ходимларга буюртмалар лойиҳалари. Шу билан
+                  бирга, заводнинг бошқа таркибий бўлинмаларидан (ходимларидан)
+                  кейин лойиҳаларни тасдиқлаш. Умумий ва махсус юридик судларида
+                  заводнинг ишончномаси бўйича ишларни рўйхатга олиш ва юритиш,
+                  уларни ҳисобга олиш ва сақлашни амалга ошириш. Комбинат
+                  ходимларига ташкилий-ҳуқуқий ва бошқа ҳуқуқий масалалар бўйича
+                  маслаҳат бериш, хулосалар тайёрлаш, ҳужжатлар ва
+                  мулкий-ҳуқуқий характердаги ҳужжатларни тайёрлашда ёрдам
+                  бериш..
+                </p>
+              </div>
+              <div class="accordion__end__btn">
+                <button class="send__btn">
+                  <img class="send__btn__icon" src="{% static 'images/icon/document.png' %}"  alt="" />
+                  Резюме тулдириш
+                </button>
+                <button class="down__btn" id="down-btn">...Batafsil</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+
+    <!-- footer -->
+
+    <footer>
+      <div class="footer__wrapper">
+        <div class="container">
+          <p class="footer__disc">
+            ©UZMETKOMBINAT 2021, developed by
+            <span class="footer__disc__span">Wasaf in Solution</span>
+          </p>
+        </div>
+      </div>
+    </footer>
+
+    <script src="{% static '/js/mainscript.js' %}"></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+      crossorigin="anonymous"
+    ></script>
+  </body>
+</html>

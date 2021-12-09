@@ -1,10 +1,11 @@
 from django.urls import path
-from .views import AddFormView,adminPanelView,allApplicants,AddJobView,AllJobsView,InterviewFormView,ApplicantDetailView
+from .views import AddFormView,adminPanelView,allApplicants,\
+    AddJobView,AllJobsView,InterviewFormView,ApplicantDetailView,HomePageView
 from django.contrib.auth.mixins import LoginRequiredMixin
 
 urlpatterns = [
     path('',AddFormView.as_view(),name="addForm"),
-    # path('resume',myFormView,name='myForm'),
+    path('home',HomePageView.as_view(),name='homepage'),
     path('manager',adminPanelView.as_view(),name='dashboard'),
     path('manager/applicants',allApplicants.as_view(),name='all_applicants'),
     path('manager/applicants/<int:pk>',ApplicantDetailView.as_view(),name="applicantDetail"),
