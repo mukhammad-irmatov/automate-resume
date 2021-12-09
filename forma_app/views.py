@@ -48,6 +48,8 @@ class HomePageView(ListView):
     template_name = 'home.html'
     context_object_name = 'all_jobs'
 
+
+
 class AddFormView(TemplateView):
     template_name = 'formuz.html'
 

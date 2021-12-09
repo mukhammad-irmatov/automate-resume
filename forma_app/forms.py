@@ -150,6 +150,7 @@ class JobForm(forms.ModelForm):
     languages = forms.CharField(label='Тиллар', required=False,widget=forms.TextInput(attrs={'placeholder': 'мисол учун: Xitoy tili - Сўзлашув, Рус тили - erkin, Узбек тили - erkin'}))
     Place = forms.CharField(label='Иш жойи', required=False,widget=forms.TextInput(attrs={'placeholder': 'мисол учун: Тошкент вилояти'}))
     jobText = forms.CharField(label="Иш ҳақида батафсилроқ маълумот беринг",widget=forms.Textarea)
+
     class Meta:
         model = Job
         fields = "__all__"

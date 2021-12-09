@@ -4,8 +4,8 @@ from .views import AddFormView,adminPanelView,allApplicants,\
 from django.contrib.auth.mixins import LoginRequiredMixin
 
 urlpatterns = [
-    path('',AddFormView.as_view(),name="addForm"),
-    path('home',HomePageView.as_view(),name='homepage'),
+    path('form',AddFormView.as_view(),name="addForm"),
+    path('',HomePageView.as_view(),name='homepage'),
     path('manager',adminPanelView.as_view(),name='dashboard'),
     path('manager/applicants',allApplicants.as_view(),name='all_applicants'),
     path('manager/applicants/<int:pk>',ApplicantDetailView.as_view(),name="applicantDetail"),

@@ -11,9 +11,12 @@ class Job(models.Model):
     languages = models.CharField(max_length=100,blank=True,null=True,default="Белгиланмаган")
     Place = models.CharField(max_length=200,blank=True,null=True,default="Белгиланмаган")
     jobText = models.TextField()
+    JobDate = models.DateField(auto_now_add=True,null=True,blank=True)
 
     def __str__(self):
         return self.jobName
+    class Meta:
+        ordering = ['JobDate']
 
 class Interview(models.Model):
     interviewJob = models.ForeignKey(
