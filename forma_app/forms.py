@@ -84,7 +84,7 @@ class MyForm(forms.ModelForm):
     criminal_history= forms.CharField(label='23. Маъмурий ёки жиноий жавобгарликка тортилганмисиз?', widget=forms.TextInput(attrs={'placeholder': 'Маъмурий ёки жиноий жавобгарликка тортилганмисиз?'}))
     homeNumber = forms.CharField(label='уй телефон рақами',required=False, widget=forms.TextInput(attrs={'placeholder': 'уй телефон рақами'}))
     phoneNumber = forms.CharField(label='мобил алоқа', required=False,widget=forms.TextInput(attrs={'placeholder': 'мобил алоқа'}))
-    email = forms.CharField(label='e-mail', widget=forms.TextInput(attrs={'placeholder': 'e-mail'}))
+    email = forms.CharField(label='e-mail', required=False,widget=forms.TextInput(attrs={'placeholder': 'e-mail'}))
     additional_info = forms.CharField(label='26. Ўзингиз ҳақингизда яна нималарни қўшимча қила оласиз',required=False, widget=forms.TextInput(attrs={'placeholder': 'Ўзингиз ҳақингизда яна нималарни қўшимча қила оласиз'}))
     approve_info = forms.ChoiceField(label='27. Ушбу резюмеда кўрсатилган маълумотларни тасдиқлайсизми ',choices=approve_choices, widget=forms.RadioSelect())
     agreement = forms.ChoiceField(label='28. Шахсий маълумотларингизни қайта ишлашимизга (ўрганишимизга) розилик берасизми',choices=agreement_choices, widget=forms.RadioSelect())

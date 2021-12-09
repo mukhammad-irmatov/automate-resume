@@ -2,7 +2,7 @@ from django.shortcuts import redirect, render
 from django.http import HttpResponse
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.urls import reverse_lazy, reverse
-from django.views.generic import TemplateView,ListView,CreateView
+from django.views.generic import TemplateView,ListView,CreateView,DetailView
 from .models import UserForm_uz,Education_uz,Experience_uz,Recommendation_uz,OtherDocuments,Job
 from .forms import MyForm,EducationForm,ExperienceForm,RecommendationForm,OtherDocumentsForm,JobForm,InterviewForm
 from django.forms import modelformset_factory
@@ -23,12 +23,18 @@ class allApplicants(LoginRequiredMixin,ListView):
     ordering = ['time']
     login_url = 'login'
 
+class ApplicantDetailView(LoginRequiredMixin,DetailView):
+    model = UserForm_uz
+    template_name = 'applicantDetail.html'
+    login_url = 'login'
+    context_object_name = 'applicants'
+
+
 class AddJobView(LoginRequiredMixin,CreateView):
     form_class = JobForm
     template_name = "add_job.html"
     success_url = reverse_lazy('all_jobs')
     login_url = 'login'
-
 
 
 class AllJobsView(LoginRequiredMixin,ListView):
