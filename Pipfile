@@ -11,6 +11,7 @@ django-multi-form-view = "*"
 six = "*"
 twilio = "*"
 django-google-translate = "*"
+django-bootstrap-datepicker-plus = "*"
 
 [dev-packages]
 

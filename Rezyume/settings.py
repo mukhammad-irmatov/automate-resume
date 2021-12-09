@@ -43,7 +43,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'forma_app.apps.FormaAppConfig',
-    'crispy_forms'
+    'crispy_forms',
 ]
 
 

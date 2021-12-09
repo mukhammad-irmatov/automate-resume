@@ -47,7 +47,8 @@ class HomePageView(ListView):
     model = Job
     template_name = 'home.html'
     context_object_name = 'all_jobs'
-
+class AboutPageView(TemplateView):
+    template_name = 'about.html'
 
 
 class AddFormView(TemplateView):

@@ -15,15 +15,17 @@
       <nav class="nav">
         <div class="nav_container">
           <div class="nav__logo">
+              <a class="nav__link" href="{% url 'homepage' %}">
             <img src="{% static 'images/img/logo.png' %}">
+              </a>
           </div>
           <div class="nav__menu">
             <ul class="nav__list">
               <li class="nav__item">
-                <a class="nav__link" href="index.html"> Вакансиялар </a>
+                <a class="nav__link" href="{% url 'homepage' %}"> Вакансиялар </a>
               </li>
               <li class="nav__item">
-                <a class="nav__link" href="company.html"> Компания ҳақида </a>
+                <a class="nav__link" href="{% url 'about' %}"> Компания ҳақида </a>
               </li>
             </ul>
             <div class="nav__contact">
@@ -64,6 +66,16 @@
               <a class="nav__btn-link" href="/"> Рус </a>
             </button>
           </div>
+
+                 <ul class="nav__list">
+              <li class="nav__item">
+                  {% if user.is_authenticated %}
+                <a class="nav__link" href="{% url 'logout' %}">сайтдан чиқиш</a>
+              </li>
+                  {% else %}
+                  <a class="nav__link" href="{% url 'login' %}"> Сайтга кириш </a>
+                  {% endif %}
+            </ul>
 
           <div class="nav__btns">
             <button class="nav__btn nav__open">

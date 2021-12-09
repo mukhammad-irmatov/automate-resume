@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+{% load static %}
+
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="{% static '/css/main.css' %}" />
+    <title>Uz Kombinat</title>
+  </head>
+  <body></body>
+</html>
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Компания ҳақида</title>
+  </head>
+  <body>
+    <header class="header">
+      <nav class="nav">
+        <div class="nav_container">
+          <div class="nav__logo">
+              <a class="nav__link" href="{% url 'homepage' %}">
+            <img src="{% static 'images/img/logo.png' %}" alt="" />
+              </a>
+          </div>
+          <div class="nav__menu">
+            <ul class="nav__list">
+              <li class="nav__item">
+                <a class="nav__link" href="{% url 'homepage' %}"> Вакансиялар </a>
+              </li>
+              <li class="nav__item">
+                <a class="nav__link" href="{% url 'about' %}"> Компания ҳақида </a>
+              </li>
+            </ul>
+            <div class="nav__contact">
+              <div class="nav__contact-icon">
+                <img class="contact__icon" src="{% static 'images/icon/phone.png' %}" alt="" />
+              </div>
+              <div class="nav__contact-data">
+                <p class="nav__contact-text">
+                  Информацион-техник қўллаб-қувватлаш
+                </p>
+                <a class="nav__contact-link" href="tel:+998(90)123-45-67">
+                  +998(90)123-45-67
+                </a>
+              </div>
+            </div>
+          </div>
+
+          <div class="dropdown">
+            <button onclick="myFunction()" class="dropbtn">
+              Уз
+              <img class="drop__icon" src="{% static 'images/icon/lang.png' %}" alt="" />
+            </button>
+            <div id="myDropdown" class="dropdown-content">
+              <a href="#">Уз</a>
+              <a href="#">Рус</a>
+              <a href="#">Англиский</a>
+            </div>
+          </div>
+
+          <div class="nav__media__lang">
+            <button class="nav__btn-media">
+              <img
+                class="nav__contact-icon" src="{% static 'images/icon/phone.png' %}" alt="" />
+            </button>
+            <button class="nav__btn-media nav__lang">
+              <a class="nav__btn-link" href="/">Уз</a>
+            </button>
+            <button class="nav__btn-media nav__lang">
+              <a class="nav__btn-link" href="/"> Рус </a>
+            </button>
+          </div>
+
+                 <ul class="nav__list">
+              <li class="nav__item">
+                  {% if user.is_authenticated %}
+                <a class="nav__link" href="{% url 'logout' %}">сайтдан чиқиш</a>
+              </li>
+                  {% else %}
+                  <a class="nav__link" href="{% url 'login' %}"> Сайтга кириш </a>
+                  {% endif %}
+            </ul>
+
+          <div class="nav__btns">
+            <button class="nav__btn nav__open">
+              <img class="nav__btn-img" src="{% static 'images/icon/burger.png' %}" alt="" />
+            </button>
+            <button class="nav__btn nav__close">
+              <img class="nav__btn-img" src="{% static 'images/icon/close.png' %}" alt="" />
+            </button>
+          </div>
+        </div>
+      </nav>
+    </header>
+    <div class="company__wrapper">
+      <div class="container">
+        <div class="company__hero">
+          <img class="company__img" src="{% static 'images/img/companyImg.png' %}" alt="" />
+          <div class="company__disc">
+            <h2 class="company__title">
+              «Ўзбекистон металлургия комбинати» акциядорлик жамияти ҳақида
+            </h2>
+            <p class="company__disc__text">
+              «Ўзбекистон металлургия комбинати» акциядорлик жамияти
+              республикада етакчи қора металлургия корхонасидир. Ўзбекистоннинг
+              мустақиллик йилларида корхона жўшқин ривожланиб, йилдан йилга ўз
+              қувватларини ошириб келмоқда.«Ўзбекистон металлургия комбинати»
+              акциядорлик жамияти 2020 йил 5 март куни 76 ёшга тўлди. Комбинат
+              негизли соҳа бўлиб, барча бошқа корхоналар билан яқин ўзаро
+              алоқада. Шунинг учун Ўзбекистон Республикасида қора металлургия
+              ривожланиши иқтисодиётнинг замонавий ривожланиш босқичининг энг
+              муҳим устувор умумдавлат вазифасидир.
+              <br />
+              <br />
+
+              Ишлаб чиқаришнинг узлюксиз реконструктсияси, техник қайта
+              жиҳозланиши ва модернизацияси юқори сифатли рақобатбардош
+              маҳсулотни ишлаб чиқаришга имкон беради ва у республиканинг саноат
+              корхоналарига ва қурилиш индустриясига маҳсулот йетказиб берилади,
+              шунингдек экспортга ҳам юклаб жўнатади. Бизда катта, дўстона ва
+              маъсулиятли жамоамиз бор ва сизда ҳам бизнинг қаторимизга қўшилиб
+              компаниямизнинг ривожланиши ва барқарорлигига муносиб ҳисса қўшиш
+              учун имконият бор.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- footer -->
+
+    <footer>
+      <div class="footer__wrapper">
+        <div class="container">
+          <p class="footer__disc">
+            ©UZMETKOMBINAT 2021, developed by
+            <span class="footer__disc__span">Wasaf in Solution</span>
+          </p>
+        </div>
+      </div>
+    </footer>
+
+    <script src="{% static 'js/mainscript.js' %}"></script>
+  </body>
+</html>
