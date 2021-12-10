@@ -2,7 +2,7 @@
 {% load static %}
 {% load crispy_forms_tags %}
 
-{% block title %} Барча иш эълонлари {% endblock title %}
+{% block title %} Иш эълонини ўчириш {% endblock title %}
 
 {% block content %}
 <div class="right_col" role="main">
@@ -13,7 +13,7 @@
       <div class="col-md-12 col-sm-12 ">
         <div class="x_panel">
           <div class="x_title">
-            <h2>Барча иш эълонлари </h2>
+            <h2>Иш эълонини ўчириш </h2>
             <ul class="nav navbar-right panel_toolbox">
               <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
               </li>
@@ -27,28 +27,12 @@
               <div class="row">
                   <div class="col-sm-12">
                     <div class="card-box table-responsive">
-                    <table class="table table-bordered table-striped table-responsive-sm">
-                    <thead class="thead-light">
-                    <tr>
-                             <th scope="col-4">Ваканция номи</th>
-                              <th scope="col-3">Маълумоти</th>
-                              <th scope="col-2">Иш тажрибаси*</th>
-                              <th scope="col-3">Иш жойи</th>
-                        <th scope="col-3">********</th>
-                    </tr>
-                    </thead>
-                        <tbody>
-                        {% for job in all_jobs_context %}
-                         <tr>
-                          <th>{{ job.jobName }}</th>
-                          <td>{{ job.education }}</td>
-                          <td>{{ job.workExperience }}</td>
-                          <td>{{ job.Place }}</td>
-                             <td> <a href="{% url 'jobdetail' job.pk %}" class="btn btn-success"> Батафсил </a> </td>
-                        </tr>
-                        {% endfor %}
-                        </tbody>
-                    </table>
+                   <h1>Иш эълонини ўчириш </h1>
+                        <form action="" method="post">{% csrf_token %}
+                        <p>Иш эълонини ўчиришни хоҳлайсизми? "{{ job.jobName }}"?</p>
+                       <button type="submit" class="btn btn-danger">ўчириш</button>
+                        </form>
+
           </div>
         </div>
       </div>

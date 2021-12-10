@@ -2,8 +2,8 @@ from django.shortcuts import redirect, render
 from django.http import HttpResponse
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.urls import reverse_lazy, reverse
-from django.views.generic import TemplateView,ListView,CreateView,DetailView
-from .models import UserForm_uz,Education_uz,Experience_uz,Recommendation_uz,OtherDocuments,Job
+from django.views.generic import TemplateView,ListView,CreateView,DetailView,UpdateView,DeleteView
+from .models import UserForm_uz,Education_uz,Experience_uz,Recommendation_uz,OtherDocuments,Job,Interview
 from .forms import MyForm,EducationForm,ExperienceForm,RecommendationForm,OtherDocumentsForm,JobForm,InterviewForm
 from django.forms import modelformset_factory
 from django.conf import settings
@@ -20,7 +20,7 @@ class allApplicants(LoginRequiredMixin,ListView):
     model = UserForm_uz
     template_name = 'all_applicants.html'
     context_object_name = 'allApplicants'
-    ordering = ['time']
+    ordering = ['-time']
     login_url = 'login'
 
 class ApplicantDetailView(LoginRequiredMixin,DetailView):
@@ -43,6 +43,20 @@ class AllJobsView(LoginRequiredMixin,ListView):
     context_object_name = 'all_jobs_context'
     login_url = 'login'
 
+class JobdetailView(LoginRequiredMixin,DetailView):
+    model = Job
+    template_name = 'jobdetail.html'
+    login_url = 'login'
+class JobUpdateView(LoginRequiredMixin,UpdateView):
+    model = Job
+    template_name = 'job_update.html'
+    login_url = 'login'
+    fields = ['jobName','education','workExperience','personalSkills','languages','Place','jobText']
+class JobDeleteView(LoginRequiredMixin,DeleteView):
+    model = Job
+    template_name = 'job_delete.html'
+    login_url = 'login'
+    success_url = reverse_lazy('dashboard')
 class HomePageView(ListView):
     model = Job
     template_name = 'home.html'
@@ -172,3 +186,7 @@ class InterviewFormView(LoginRequiredMixin,TemplateView):
         return self.render_to_response({'interview_form':interview_form})
 
 
+class AllInterview(ListView):
+    model = Interview
+    template_name = 'allInterview.html'
+    context_object_name = 'intervyular'

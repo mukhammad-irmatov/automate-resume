@@ -338,6 +338,7 @@ img {
 }
 .input__wrapper {
   background: #f3f3f3;
+  margin-top: 89px;
 }
 .input__search {
   display: flex;

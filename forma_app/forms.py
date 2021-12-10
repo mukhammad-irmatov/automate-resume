@@ -55,7 +55,7 @@ class MyForm(forms.ModelForm):
     lastName = forms.CharField(label='1. Фамилия', widget=forms.TextInput(attrs={'placeholder': 'Фамилиянгизни киритинг'}))
     firstName = forms.CharField(label='2. Исм', widget=forms.TextInput(attrs={'placeholder': 'Исмингизни киритинг'}))
     middleName = forms.CharField(label='3. Шарифингиз',required=False, widget=forms.TextInput(attrs={'placeholder': 'Шарифингизни киритинг'}))
-    birthData = forms.DateField(label='Тугилган кунингиз',widget=forms.DateInput(format='%d/%m/%Y',attrs={'placeholder': 'Тугилган кунингизни киритинг'}),
+    birthData = forms.DateField(label='Тугилган кунингиз',widget=forms.DateInput(format='%d/%m/%Y',attrs={'placeholder': '15/01/1998'}),
                                 input_formats=('%d/%m/%Y',))
 
     nation = forms.CharField(label='5. Миллати',required=False, widget=forms.TextInput(attrs={'placeholder': 'Миллати'}))
@@ -101,9 +101,9 @@ class MyForm(forms.ModelForm):
 
 
 class EducationForm(forms.ModelForm):
-    startingDate  = forms.DateField(label='Қабул қилинган сана',widget=forms.DateInput(format='%d/%m/%Y',attrs={'placeholder': '20/01/1995'}),
+    startingDate  = forms.DateField(label='Қабул қилинган сана',widget=forms.DateInput(format='%d/%m/%Y',attrs={'placeholder': '20/01/2020'}),
                                 input_formats=['%d/%m/%Y',])
-    endingDate = forms.DateField(label='Тугаш санаси',widget=forms.DateInput(format='%d/%m/%Y',attrs={'placeholder': 'Тугаш санаси'}),
+    endingDate = forms.DateField(label='Тугаш санаси',widget=forms.DateInput(format='%d/%m/%Y',attrs={'placeholder': '20/01/2020'}),
                                 input_formats=['%d/%m/%Y',])
     name = forms.CharField(label='Ўқув муассасасинин тўлиқ номи', widget=forms.TextInput(attrs={'placeholder': 'Ўқув муассасасинин тўлиқ номи'}))
     degree = forms.CharField(label='Даражаси', widget=forms.TextInput(attrs={'placeholder': 'Даражаси (касб-хунар коллежи/бакалавр/магистр/доктор)'}))
@@ -114,9 +114,9 @@ class EducationForm(forms.ModelForm):
         exclude = ['form']
 
 class ExperienceForm(forms.ModelForm):
-    startWorkDate = forms.DateField(label='Қабул қилинган сана',required=False,widget=forms.DateInput(format='%d/%m/%Y',attrs={'placeholder': 'Қабул қилинган сана'}),
+    startWorkDate = forms.DateField(label='Қабул қилинган сана',required=False,widget=forms.DateInput(format='%d/%m/%Y',attrs={'placeholder': '20/01/2020'}),
                                     input_formats=['%d/%m/%Y',])
-    endWorkDate = forms.DateField(label='Ишдан бушатиш санаси',required=False,widget=forms.DateInput(format='%d/%m/%Y',attrs={'placeholder': 'Ишдан бушатиш санаси'}),
+    endWorkDate = forms.DateField(label='Ишдан бушатиш санаси',required=False,widget=forms.DateInput(format='%d/%m/%Y',attrs={'placeholder': '20/01/2020'}),
                                   input_formats=['%d/%m/%Y',])
     name = forms.CharField(label='Ташкилот (корхона) номи', required=False,widget=forms.TextInput(attrs={'placeholder': 'Ташкилот (корхона) номи'}))
     lavozim = forms.CharField(label='Қайси лавозимда', required=False,widget=forms.TextInput(attrs={'placeholder': 'Қайси лавозимда ишлагансиз'}))
