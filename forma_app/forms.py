@@ -1,10 +1,7 @@
 from django import forms
-from .models import UserForm_uz,Education_uz,Experience_uz,Recommendation_uz,OtherDocuments,Job,Interview
+from .models import UserForm_uz,Education_uz,Experience_uz,Job,Interview
 
-marriage_choices = [('Уйланган', 'Уйланган'),
-                    ('Бўйдок', 'Бўйдок')]
-children_choices = [('Ха', 'Ха'),
-                    ('Йўк', 'Йўк')]
+
 computer_choices = [('Эга эмас', 'Эга эмас'),
                     ('Бошлангич', 'Бошлангич'),
                     ('Ўртача', 'Ўртача'),
@@ -16,29 +13,9 @@ language_choices = (('Билмайман', 'Билмайман'),
                     ('Ўртача', 'Ўртача'),
                     ('Яхши', 'Яхши'),
                     ('Жуда яхши', 'Жуда яхши'), )
-personalSkills_choices = [('интизомли', 'интизомли'),
-                    ('1', 'ижрочи'),
-                    ('2', 'тиришқоқ'),
-                    ('3', 'ақлли'),
-                    ('4', 'меҳнаткаш'),
-                    ('5', 'ҳалол'),
-                    ('6', 'ташаббускор'),
-                    ('7','ташкилотчилик қобилияти'),
-                    ('8','жамоада изчил ишлаш қобилияти'),
-                    ('9', 'компаниянинг манфаатларини ҳимоя қилиш қобилияти'), ]
 
-readinessWork_choices = [('1', '5 кунлик иш ҳафтаси'),
-                    ('2', 'Командировка оддий'),
-                    ('3', 'Командировка (яшаш жойи ўзгариши)'),
-                    ('4', 'Иш жойи бощқа ҳудудга ўзгариши'),
-                    ('5', 'Иш жойи бощқа давлатга ўзгариши'), ]
-hobby_choices = [('Китоблар', 'Китоблар'),
-                    ('Музей', 'Музей'),
-                    ('Кино', 'Кино'),
-                    ('Саёхат', 'Саёхат'),
-                    ('Театр', 'Театр'),
-                    ('Спорт', 'Спорт'),
-                    ('Дўстлар давраси', 'Дўстлар давраси'), ]
+
+
 approve_choices = [('Ха', 'Ха'),
                     ('Йўк', 'Йўк')]
 agreement_choices = [('Ха', 'Ха'),
@@ -60,43 +37,23 @@ class MyForm(forms.ModelForm):
 
     nation = forms.CharField(label='5. Миллати',required=False, widget=forms.TextInput(attrs={'placeholder': 'Миллати'}))
     birthPlace = forms.CharField(label='6. Туғилган жойи', widget=forms.TextInput(attrs={'placeholder': 'Туғилган жойи'}))
-    marriage_status = forms.ChoiceField(label='7. Оилавий ҳолати',choices=marriage_choices, widget=forms.RadioSelect())
-    children = forms.ChoiceField(label='8. Фарзандлари',choices=children_choices, widget=forms.RadioSelect)
-    militaryResp = forms.CharField(label='9. Ҳарбий хизматга мажбурлигингиз ва ҳарбий унвонингиз', widget=forms.TextInput(attrs={'placeholder': 'Ҳарбий хизматга мажбурлигингиз ва ҳарбий унвонингиз борми'}))
+
     additionalCourses = forms.CharField(label='11. Қўшимча маълумот, малака ошириш, курслар ва тренинглар',required=False, widget=forms.TextInput(attrs={'placeholder': 'Қўшимча маълумот, малака ошириш, курслар ва тренингларда қатнашганмисиз'}))
     language_uzbek = forms.ChoiceField(label='Ўзбекча',choices=language_choices)
     language_russian= forms.ChoiceField(label='Русча',choices=language_choices)
     language_english = forms.ChoiceField(label='Инглизча',required=False,choices=language_choices)
     language_boshqa = forms.CharField(label='Бошка тил', required=False,widget=forms.TextInput(attrs={'placeholder': 'Бошка тил'}))
-    computer_literacy = forms.ChoiceField(label='13. ЭҲМ да ишлаш ва программаларнинг турлари бўйича билим ва кўникмалар',choices=computer_choices,widget=forms.RadioSelect)
-    functional_resp = forms.CharField(label='Ишдаги функционал мажбуриятлар', required=False,widget=forms.TextInput(attrs={'placeholder': 'Ишдаги функционал мажбуриятлар'}))
-    work_experience = forms.CharField(label='Иш тажрибаси', required=False,widget=forms.TextInput(attrs={'placeholder': 'Иш тажрибаси'}))
-    yutuqlar = forms.CharField(label='Ишдаги ютуқлар', required=False,widget=forms.TextInput(attrs={'placeholder': 'Иш давомидаги ютуқларингиз'}))
-    leaving_work_reason = forms.CharField(label='15. Нима сабабдан сиз охирги иш жойингизни тарк этдингиз (ёки қарор қилдингиз)', required=False,widget=forms.TextInput(attrs={'placeholder': 'Нима сабабдан сиз охирги иш жойингизни тарк этдингиз (ёки қарор қилдингиз)'}))
-    main_skills = forms.CharField(label='16. Асосий кўникмалар', required=False,widget=forms.TextInput(attrs={'placeholder': 'Асосий кўникмалар'}))
-    personalSkills = forms.MultipleChoiceField(label='17. Шахсий фазилатларингиз',required=False,choices=personalSkills_choices,widget=forms.CheckboxSelectMultiple())
-    readinessWork= forms.MultipleChoiceField(label='18. Ишга тайёрлигингиз',required=False,choices=readinessWork_choices,widget=forms.CheckboxSelectMultiple())
-    hobby = forms.MultipleChoiceField(label='19. Қизиқишлар (хобби)',required=False,choices=hobby_choices,widget=forms.CheckboxSelectMultiple())
-    hobby_boshqa = forms.CharField(label='Бошқа қизиқишлар', required=False,widget=forms.TextInput(attrs={'placeholder': 'Бошқа қизиқишлар'}))
-    expected_salary = forms.CharField(label='20. Қанча ойлик маошга мўлжал қилмоқдасиз (сум)',required=False, widget=forms.TextInput(attrs={'placeholder': 'Қанча ойлик маошга мўлжал қилмоқдасиз (сум)'}))
-    reasontoWork = forms.CharField(label='21. Сизни компаниямизда ишлашга нималар ундайди',required=False, widget=forms.TextInput(attrs={'placeholder': 'Сизни компаниямизда ишлашга нималар ундайди'}))
-    relatives_company = forms.CharField(label='22. Ушбу компанияда ишлайдиган Сизга тегишли қариндош ёки алоқадор кишилар борми', widget=forms.TextInput(attrs={'placeholder': 'Ушбу компанияда ишлайдиган Сизга тегишли қариндош ёки алоқадор кишилар борми'}))
-    criminal_history= forms.CharField(label='23. Маъмурий ёки жиноий жавобгарликка тортилганмисиз?', widget=forms.TextInput(attrs={'placeholder': 'Маъмурий ёки жиноий жавобгарликка тортилганмисиз?'}))
+    computer_literacy = forms.ChoiceField(label='',choices=computer_choices,widget=forms.RadioSelect)
+
     homeNumber = forms.CharField(label='уй телефон рақами',required=False, widget=forms.TextInput(attrs={'placeholder': 'уй телефон рақами'}))
     phoneNumber = forms.CharField(label='мобил алоқа', required=False,widget=forms.TextInput(attrs={'placeholder': 'мобил алоқа'}))
     email = forms.CharField(label='e-mail', required=False,widget=forms.TextInput(attrs={'placeholder': 'e-mail'}))
-    additional_info = forms.CharField(label='26. Ўзингиз ҳақингизда яна нималарни қўшимча қила оласиз',required=False, widget=forms.TextInput(attrs={'placeholder': 'Ўзингиз ҳақингизда яна нималарни қўшимча қила оласиз'}))
-    approve_info = forms.ChoiceField(label='27. Ушбу резюмеда кўрсатилган маълумотларни тасдиқлайсизми ',choices=approve_choices, widget=forms.RadioSelect())
-    agreement = forms.ChoiceField(label='28. Шахсий маълумотларингизни қайта ишлашимизга (ўрганишимизга) розилик берасизми',choices=agreement_choices, widget=forms.RadioSelect())
-    passport_file = forms.FileField(label='Шахсни тасдиқловчи ҳужжат (Номзоднинг паспорти)')
-    diplom_file = forms.FileField(label='Бирор таълим муассасасини тугатганлиги ҳақидаги диплом/сертификатлар битта архив файлда ')
-    trudovoyKnishka = forms.FileField(label='Меҳнат дафтарчаси',required=False)
-    fullName = forms.CharField(label='ФИО', widget=forms.TextInput(attrs={'placeholder': 'Тўлиқ фамилия исм-шарифингизни киритинг'}))
+
 
     class Meta:
         model = UserForm_uz
         # fields = '__all__'
-        exclude = ['time']
+        exclude = ['time','test_id']
 
 
 
@@ -126,21 +83,6 @@ class ExperienceForm(forms.ModelForm):
         model = Experience_uz
         exclude = ['form']
 
-
-class RecommendationForm(forms.ModelForm):
-    fullName = forms.CharField(label='Ф.И.Ш. (тўлиқ)', required=False,widget=forms.TextInput(attrs={'placeholder': 'Ф.И.Ш. (тўлиқ)'}))
-    workPlace = forms.CharField(label='Иш жойи, лавозими', required=False,widget=forms.TextInput(attrs={'placeholder': 'Иш жойи, лавозими'}))
-    phoneAndEmail = forms.CharField(label='Телефон рақами, е-mail', required=False,widget=forms.TextInput(attrs={'placeholder': 'Телефон рақами, е-mail'}))
-    class Meta:
-        model = Recommendation_uz
-        exclude = ['form']
-
-class OtherDocumentsForm(forms.ModelForm):
-
-    comment = forms.CharField(label='Хужжатга изох')
-    class Meta:
-        model = OtherDocuments
-        exclude = ['form']
 
 class JobForm(forms.ModelForm):
     jobName = forms.CharField(label='Ваканция номи', widget=forms.TextInput(attrs={'placeholder': 'ваканция номи'}))

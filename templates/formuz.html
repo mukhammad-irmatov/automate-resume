@@ -171,25 +171,11 @@
 
         </div>
 
-        <div class="col-sm-4 was-validated">
-            {{ my_form.marriage_status|as_crispy_field }}
-        </div>
-
-        <div class="col-sm-4 was-validated">
-            {{ my_form.children|as_crispy_field }}
-        </div>
-
-        <div class="col-12 mb-0 was-validated">
-            {{ my_form.militaryResp|as_crispy_field }}
-            <span class="text-muted small h6" style="font-size:14px">хизмат тури, резерв таркиби, ҳарбий рўйхатга турган жой, ҳарбий гувоҳнома №</span>
-        </div>
-
-
 
 {#    ----------------------------------------Education form field--------------------------------#}
 
             <div class="col-sm-12 m-3">
-                 <p>10. Маълумотингиз</p>
+                 <p>10. Қайси ўқув масканларинин тамомлагансиз</p>
                 <hr class="border border-info">
                 {{ education_formset.management_form }}
                 {% for form in  education_formset %}
@@ -265,7 +251,7 @@
     <div class="row">
 
         <div class="col-sm-12">
-            <h6>13. ЭҲМ да ишлаш ва программаларнинг турлари бўйича билим ва кўникмалар</h6>
+            <h6>13. Компютер саводхонлиги ва компютерда ишлаш кўникмалари</h6>
             <hr class="border border-info">
         </div>
 
@@ -324,114 +310,11 @@
        <p class="text-right">
             <button id="add-Expform" type="button" class="btn-sm border-0 btn-success text-right">   <i class="fal fa-plus"></i> Яна қўшиш</button>
                 </p>
- <hr class="border border-info">
+
         </div>
         </div>
 
 {#--------------------------------------------ENDED------------------------------------------------------------------------#}
-    <div class="row">
-        <div class="col-12">
-            <div class="form-group">
-                {{ my_form.functional_resp|as_crispy_field }}
-            </div>
-        </div>
-        <div class="col-12">
-            <div class="form-group">
-               {{ my_form.work_experience|as_crispy_field }}
-            </div>
-        </div>
-        <div class="col-12">
-            <div class="form-group">
-                {{ my_form.yutuqlar|as_crispy_field }}
-            </div>
-        <hr class="border border-info">
-        </div>
-    </div>
-
-    <div class="row">
-        <div class="col-12">
-            <div class="form-group">
-                {{ my_form.leaving_work_reason|as_crispy_field }}
-            </div>
-        </div>
-        <div class="col-12">
-            <div class="form-group">
-                {{ my_form.main_skills|as_crispy_field }}
-                <p class="text-muted index-info">биринчи навбатда кўрсатилиши лозим: кўрилаётган мутахассислик бўйича қанақа профессионал тажриба ва кўникмаларга эгалигингизни, унга таълуқли техника ва ускуналарнинг турларини билишингиз ва улар билан муомала қилишингизни, махсус технологиялар ва дастурларни ўзлаштирганингизни, қўйилган вазифани яхши бажариш учун зарур бўлган билим ва махоратингизни ва ҳ.к.</p>
-            </div>
-        </div>
-    </div>
-
-    <div class="row">
-        <div class="col-12">
-            <hr class="border border-info">
-
-        </div>
-    <div class="col-4">{{ my_form.personalSkills|as_crispy_field }}</div>
-    <div class="col-4">{{ my_form.readinessWork|as_crispy_field }}</div>
-    <div class="col-4">{{ my_form.hobby|as_crispy_field }}</div>
- <div class="col-sm-12">
-            {{ my_form.hobby_boshqa|as_crispy_field }}
-        </div>
-    </div>
- <hr class="border border-info">
-    <div class="row">
-
-
-
-        <div class="col-sm-12">
-            {{ my_form.expected_salary|as_crispy_field }}
-        </div>
-
-        <div class="col-sm-12">
-            {{ my_form.reasontoWork|as_crispy_field }}
-        </div>
-
-    </div>
-
-    <div class="form-row was-validated">
-        <div class="col-12">
-            {{ my_form.relatives_company|as_crispy_field }}
-            <span class="index-info">Ф.И.Ш., ишлаш жойи ва лавозими</span>
-        </div>
-        <div class="col-12 was-validated">
-           {{ my_form.criminal_history|as_crispy_field }}
-            <span class="index-info">“йўқ”, агар “ҳа” жавоби бўлса: қаерда; қачон ва нима учун; МжК ёки ЖКнинг қайси банди бўйича</span>
-        </div>
-
-
-
-
-{#    -----------------------Recommendation FORM --------------------------------------------#}
-
-        <div class="col-sm-12">
-            <label for="">24. Ишлаган жойингиздан раҳбар ёки ҳамкасблардан ким Сизга тавсиянома бера олади</label>
-                <hr class="border border-info">
-            {{ recommend_formset.management_form }}
-            {% for form in  recommend_formset %}
-                  <div class="recom-form">
-
-        <div class="row text-left">
-            <div class="col-sm-4 ">
-            {{ form.fullName|as_crispy_field }}
-        </div>
-            <div class="col-sm-4 ">
-           {{ form.workPlace|as_crispy_field }}
-        </div>
-    <div class="col-sm-4" >
-                 {{ form.phoneAndEmail|as_crispy_field }}
-             </div>
-            </div>
-            </div>
-         {% endfor %}
-            <p class="text-right">
-            <button id="add-Recomform" type="button" class="btn-sm border-0 btn-success text-right">   <i class="fal fa-plus"></i> Яна қўшиш</button>
-                </p>
-
- <hr class="border border-info">
-        </div>
-        </div>
-{#----------------------------------------------------ENDED------------------------------------------------------#}
 
 
     <div class="row">
@@ -445,83 +328,20 @@
         </div>
         <div class="col-sm-4 was-validated">
             {{ my_form.phoneNumber|as_crispy_field }}
-  <span class="text-danger text-center">Илтимос, телефон рақамингизни халқаро форматда +998XXXXXXXXX тарзида киритинг, акс ҳолда интервюга авто-смс бормайди</span>
+  <span class="text-danger text-center">Илтимос, телефон рақамингизни халқаро форматда +998XXXXXXXXX тарзида киритинг, акс ҳолда тест ва интервюга авто-смс бормайди</span>
 
         </div>
         <div class="col-sm-4">
             {{ my_form.email|as_crispy_field }}
         </div>
 
-        <div class="col-12">
-            {{ my_form.additional_info|as_crispy_field }}
-        </div>
-        <div class="col-6">
-            {{ my_form.approve_info|as_crispy_field }}
-        </div>
-        <div class="col-6">
-            {{ my_form.agreement|as_crispy_field }}
-        </div>
     </div>
-
-    <div class="row form-group  was-validated">
-        <div class="col-12">
-            <label for="">Юбориш мажбурий бЎлган файллар</label>
-            <hr class="border border-info">
-        </div>
-        <div class="col-sm-4 was-validated">
-            {{ my_form.passport_file|as_crispy_field }}
-        </div>
-        <div class="col-sm-4 was-validated">
-           {{ my_form.diplom_file|as_crispy_field }}
-        </div>
-        <div class="col-sm-4">
-            {{ my_form.trudovoyKnishka|as_crispy_field }}
-        </div>
-    </div>
-{#       -----------------------------------OTHER DOCUMENTS FORM-----------------------------------------------------------#}
-
-
-<div class="row mb-3">
-           <div class="col-sm-12">
-            <label for="">Бошқа документлар</label>
-                <hr class="border border-secondary">
-        <span class="text-danger">Ишга оид яна бошқа ҳужжатлар бўлса, юборишингиз мумкин</span>
-
-               {{ otherdocs_formset.management_form }}
-               {% for form in  otherdocs_formset %}
-                <div class="docs-form">
-        <div class="row text-left">
-            <div class="col-sm-4 ">
-            {{ form.file|as_crispy_field }}
-        </div>
-            <div class="col-sm-8 ">
-            {{ form.comment|as_crispy_field }}
-        </div>
-
-</div></div>
-        </div>
-
-
-     </div>
-       {% endfor %}
-
-            <p class="text-right">
-            <button id="add-docsform" type="button" class="btn-sm border-0 btn-success text-right">   <i class="fal fa-plus"></i> Яна қўшиш</button>
-                </p>
-
- <hr class="border border-secondary">
-
-
-{#---------------------------------------------------ENDED FORM--------------------------------------------------#}
-
 
 
     <div class="row">
+
         <div class="col-12">
-             {{ my_form.fullName|as_crispy_field }}
-        </div>
-        <div class="col-12">
-            <p class="text-center text-danger pt-5">
+            <p class="text-center text-success pt-5">
                 Иш берувчи Сиз хақингизда тўлиқ бўлмаган ёки нотўғри биографик маълумотларни ўз ичига олган резюмени кўриб чиқмаслик хуқуқига эга
             </p>
         </div>
@@ -529,15 +349,15 @@
        <p class="text-center">
            <button type="submit" class="btn btn-danger">Резюмени жўнатиш</button>
        </p>
-
+    </div>
 </form>
 
     <script src="{% static '/js/mainscript.js' %}"></script>
     <script
       src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
       integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
-      crossorigin="anonymous"
-    ></script>
+      crossorigin="anonymous">
+    </script>
 
 
 
@@ -588,48 +408,6 @@
             {#container.appendChild(newExpForm)#}
            addExpButton.parentNode.insertBefore(newExpForm,addExpButton)
            totalExpForms.setAttribute('value', `${formExpNum+1}`) //Increment the number of total forms in the management form
-       }
-
-
-        //Recommendation form Javascript codes
-        let recomForm = document.querySelectorAll(".recom-form")
-       let addRecomButton = document.querySelector("#add-Recomform")
-       let totalRecomForms = document.querySelector("#id_recommend-TOTAL_FORMS")
-
-       let formRecomNum = recomForm.length-1 // Get the number of the last form on the page with zero-based indexing
-        addRecomButton.addEventListener('click', addRecomForm)
-
-          function addRecomForm(e) {
-           e.preventDefault()
-           let newForm = recomForm[0].cloneNode(true) //Clone the bird form
-           console.log("test")
-           let formRegex = RegExp(`recommend-(\\d){1}-`,'g') //Regex to find all instances of the form number
-           formRecomNum++ //Increment the form number
-            newForm.innerHTML = newForm.innerHTML.replace(formRegex, `recommend-${formRecomNum}-`) //Update the new form to have the correct form number
-            {#container.insertBefore(newExpForm, addExpButton) //Insert the new form at the end of the list of forms#}
-            {#container.appendChild(newExpForm)#}
-           addRecomButton.parentNode.insertBefore(newForm,addRecomButton)
-           totalRecomForms.setAttribute('value', `${formRecomNum+1}`) //Increment the number of total forms in the management form
-       }
-
-
-            //Other documents formset area  javascript codes
-       let otherdocsForm = document.querySelectorAll(".docs-form")
-       let addOtherDocsButton = document.querySelector("#add-docsform")
-       let totalDocsForms = document.querySelector("#id_otherdocs-TOTAL_FORMS")
-
-       let formOtherDocsNum = otherdocsForm.length-1 // Get the number of the last form on the page with zero-based indexing
-        addOtherDocsButton.addEventListener('click', addOtherDocsForm)
-
-       function addOtherDocsForm(e) {
-           e.preventDefault()
-           let newForm = otherdocsForm[0].cloneNode(true) //Clone the bird form
-           let formRegex = RegExp(`otherdocs-(\\d){1}-`,'g') //Regex to find all instances of the form number
-           formOtherDocsNum++ //Increment the form number
-            newForm.innerHTML = newForm.innerHTML.replace(formRegex, `otherdocs-${formOtherDocsNum}-`) //Update the new form to have the correct form number
-            addOtherDocsButton.parentNode.insertBefore(newForm, addOtherDocsButton) //Insert the new form at the end of the list of forms
-
-           totalDocsForms.setAttribute('value', `${formOtherDocsNum+1}`) //Increment the number of total forms in the management form
        }
 
        </script>
